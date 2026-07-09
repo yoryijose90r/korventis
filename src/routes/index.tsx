@@ -329,35 +329,7 @@ function Home() {
         </Container>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="bg-white py-24">
-        <Container>
-          <SectionHeading
-            eyebrow="Testimonios"
-            title="Resultados que hablan por nosotros"
-            subtitle="Empresas que fortalecieron su núcleo operativo con Korventis."
-          />
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {testimonials.map((t, i) => (
-              <Reveal as="article" key={t.name} delay={i * 90}>
-                <div className="flex h-full flex-col rounded-3xl border border-border bg-mist p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card">
-                  <Quote className="h-9 w-9 text-sky/40" />
-                  <div className="mt-4 flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, k) => (
-                      <Star key={k} className="h-4 w-4 fill-sky text-sky" />
-                    ))}
-                  </div>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-navy/80">"{t.quote}"</p>
-                  <div className="mt-6 border-t border-border pt-4">
-                    <div className="font-heading font-semibold text-navy">{t.name}</div>
-                    <div className="text-xs text-muted-foreground">{t.role}</div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
+
 
       {/* CONTACT / CTA */}
       <section className="relative overflow-hidden bg-mist py-24">
