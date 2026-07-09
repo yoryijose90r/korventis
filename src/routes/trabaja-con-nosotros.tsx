@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Heart, GraduationCap, Rocket, Globe2, Send, MapPin } from "lucide-react";
+import { Heart, GraduationCap, Rocket, Globe2, Send, MapPin, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
 import { SiteShell } from "@/components/site/site-shell";
 import { PageHero, SectionHeading, Container } from "@/components/site/primitives";
 import { Reveal } from "@/components/site/reveal";
@@ -115,8 +116,6 @@ function Trabaja() {
   );
 }
 
-import { useState } from "react";
-import { CheckCircle2 } from "lucide-react";
 
 function ApplicationForm() {
   const [sent, setSent] = useState(false);

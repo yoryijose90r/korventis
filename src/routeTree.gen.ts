@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrabajaConNosotrosRouteImport } from './routes/trabaja-con-nosotros'
 import { Route as SolucionesRouteImport } from './routes/soluciones'
 import { Route as SobreNosotrosRouteImport } from './routes/sobre-nosotros'
 import { Route as ServiciosRouteImport } from './routes/servicios'
@@ -17,6 +18,11 @@ import { Route as CasosDeExitoRouteImport } from './routes/casos-de-exito'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TrabajaConNosotrosRoute = TrabajaConNosotrosRouteImport.update({
+  id: '/trabaja-con-nosotros',
+  path: '/trabaja-con-nosotros',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolucionesRoute = SolucionesRouteImport.update({
   id: '/soluciones',
   path: '/soluciones',
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/servicios': typeof ServiciosRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soluciones': typeof SolucionesRoute
+  '/trabaja-con-nosotros': typeof TrabajaConNosotrosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/servicios': typeof ServiciosRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soluciones': typeof SolucionesRoute
+  '/trabaja-con-nosotros': typeof TrabajaConNosotrosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/servicios': typeof ServiciosRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soluciones': typeof SolucionesRoute
+  '/trabaja-con-nosotros': typeof TrabajaConNosotrosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/servicios'
     | '/sobre-nosotros'
     | '/soluciones'
+    | '/trabaja-con-nosotros'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/servicios'
     | '/sobre-nosotros'
     | '/soluciones'
+    | '/trabaja-con-nosotros'
   id:
     | '__root__'
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/servicios'
     | '/sobre-nosotros'
     | '/soluciones'
+    | '/trabaja-con-nosotros'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,10 +131,18 @@ export interface RootRouteChildren {
   ServiciosRoute: typeof ServiciosRoute
   SobreNosotrosRoute: typeof SobreNosotrosRoute
   SolucionesRoute: typeof SolucionesRoute
+  TrabajaConNosotrosRoute: typeof TrabajaConNosotrosRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/trabaja-con-nosotros': {
+      id: '/trabaja-con-nosotros'
+      path: '/trabaja-con-nosotros'
+      fullPath: '/trabaja-con-nosotros'
+      preLoaderRoute: typeof TrabajaConNosotrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/soluciones': {
       id: '/soluciones'
       path: '/soluciones'
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServiciosRoute: ServiciosRoute,
   SobreNosotrosRoute: SobreNosotrosRoute,
   SolucionesRoute: SolucionesRoute,
+  TrabajaConNosotrosRoute: TrabajaConNosotrosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
