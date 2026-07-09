@@ -294,7 +294,7 @@ function Home() {
                 variant="light"
                 eyebrow="Indicadores & Business Intelligence"
                 title="Todo tu negocio en un solo panel"
-                subtitle="Dashboards de Power BI que muestran KPIs, ventas, infraestructura y servidores en tiempo real. Menos hojas de cálculo, más decisiones."
+                subtitle="Dashboards en Power BI, Metabase y Oracle Analytics que muestran KPIs e indicadores clave en tiempo real. Menos hojas de cálculo, más decisiones."
                 className="max-w-xl"
               />
               <div className="mt-9 grid grid-cols-2 gap-6">
