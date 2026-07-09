@@ -13,7 +13,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { SiteShell } from "@/components/site/site-shell";
-import { PageHero, SectionHeading, Container, Eyebrow } from "@/components/site/primitives";
+import { PageHero, SectionHeading, Container } from "@/components/site/primitives";
 import { Reveal } from "@/components/site/reveal";
 import { CtaLink } from "@/components/site/cta-button";
 import foundersImg from "@/assets/founders.jpg";
