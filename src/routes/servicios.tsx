@@ -9,8 +9,6 @@ import {
   LayoutDashboard,
   LineChart,
   Workflow,
-  Code2,
-  Building2,
   Calculator,
   Wallet,
   ArrowRight,
