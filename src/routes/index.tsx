@@ -260,7 +260,7 @@ function Home() {
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
                     <Link
                       to="/servicios"
-                      className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-sky transition-gap hover:gap-3"
+                      className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-sky transition-all hover:gap-3"
                     >
                       Conocer más <ArrowRight className="h-4 w-4" />
                     </Link>
