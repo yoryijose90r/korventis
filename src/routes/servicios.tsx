@@ -9,8 +9,6 @@ import {
   LayoutDashboard,
   LineChart,
   Workflow,
-  Code2,
-  Building2,
   Calculator,
   Wallet,
   ArrowRight,
@@ -28,7 +26,7 @@ export const Route = createFileRoute("/servicios")({
       {
         name: "description",
         content:
-          "Servicios de Korventis: infraestructura, Oracle, SQL Server, PostgreSQL, Power BI, Business Intelligence, automatización, cloud, Docker, desarrollo y consultoría contable.",
+          "Servicios de Korventis: infraestructura, servidores, virtualización (VMware, Proxmox), cloud en Digital Ocean, Oracle, SQL Server, PostgreSQL, Power BI, Metabase, Oracle Analytics, automatización y consultoría contable.",
       },
       { property: "og:title", content: "Servicios | Korventis" },
       { property: "og:url", content: "/servicios" },
@@ -43,10 +41,10 @@ const groups = [
     label: "Infraestructura & Cloud",
     desc: "Bases tecnológicas sólidas, disponibles y seguras.",
     items: [
-      { icon: Server, t: "Infraestructura", d: "Diseño, implementación y gestión de servidores y redes." },
-      { icon: Cloud, t: "Cloud", d: "Estrategias cloud híbridas y migraciones sin interrupciones." },
+      { icon: Server, t: "Servidores", d: "Diseño, implementación y gestión de servidores físicos y virtuales." },
+      { icon: Cloud, t: "Cloud (Digital Ocean)", d: "Despliegue y administración de servidores cloud en Digital Ocean." },
       { icon: ContainerIcon, t: "Docker", d: "Contenedores para despliegues ágiles y consistentes." },
-      { icon: Boxes, t: "Virtualización", d: "Optimización de recursos y alta disponibilidad." },
+      { icon: Boxes, t: "Virtualización", d: "VMware y Proxmox para optimización de recursos y alta disponibilidad." },
     ],
   },
   {
@@ -63,17 +61,16 @@ const groups = [
     desc: "Tus datos convertidos en decisiones.",
     items: [
       { icon: BarChart3, t: "Power BI", d: "Modelos de datos e informes interactivos." },
-      { icon: LayoutDashboard, t: "Dashboards", d: "Paneles ejecutivos con KPIs en tiempo real." },
+      { icon: LineChart, t: "Metabase", d: "Análisis y dashboards ágiles sobre tus bases de datos." },
+      { icon: LayoutDashboard, t: "Oracle Analytics", d: "Analítica empresarial y visualizaciones avanzadas." },
       { icon: LineChart, t: "Business Intelligence", d: "Analítica que impulsa decisiones estratégicas." },
     ],
   },
   {
-    label: "Automatización & Desarrollo",
-    desc: "Procesos y software a la medida de tu operación.",
+    label: "Automatización",
+    desc: "Procesos eficientes, sin tareas manuales.",
     items: [
       { icon: Workflow, t: "Automatización", d: "Flujos que eliminan tareas manuales y errores." },
-      { icon: Code2, t: "Desarrollo Web", d: "Aplicaciones y portales modernos y escalables." },
-      { icon: Building2, t: "Desarrollo Empresarial", d: "Software interno adaptado a tus procesos." },
     ],
   },
   {
@@ -97,7 +94,7 @@ function Servicios() {
             <span className="text-gradient-brand">transformarse</span>
           </>
         }
-        subtitle="Un portafolio integral que combina infraestructura, datos, automatización, desarrollo y consultoría empresarial bajo un mismo estándar de excelencia."
+        subtitle="Un portafolio integral que combina infraestructura, datos, automatización y consultoría empresarial bajo un mismo estándar de excelencia."
       >
         <CtaLink to="/contacto" variant="white" size="lg">
           Solicitar Diagnóstico <ArrowRight className="h-4 w-4" />

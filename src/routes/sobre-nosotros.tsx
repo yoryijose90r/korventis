@@ -68,11 +68,12 @@ const founders = [
       "SQL Server",
       "PostgreSQL",
       "Power BI",
+      "Metabase",
+      "Oracle Analytics",
       "Business Intelligence",
       "Cloud",
       "Virtualización",
       "Automatización",
-      "Desarrollo",
     ],
   },
   {

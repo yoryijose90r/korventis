@@ -10,9 +10,8 @@ import {
   ShieldCheck,
   TrendingUp,
   Layers,
-  Quote,
-  Star,
   Building2,
+
 } from "lucide-react";
 import { SiteShell } from "@/components/site/site-shell";
 import { CtaLink } from "@/components/site/cta-button";
@@ -54,12 +53,12 @@ const services = [
   {
     icon: Server,
     title: "Infraestructura",
-    desc: "Servidores, redes, virtualización y cloud diseñados para alta disponibilidad y continuidad operativa.",
+    desc: "Servidores, virtualización en VMware y Proxmox, y cloud en Digital Ocean para alta disponibilidad y continuidad operativa.",
   },
   {
     icon: BarChart3,
     title: "Business Intelligence",
-    desc: "Power BI y dashboards que convierten tus datos dispersos en información útil para el negocio.",
+    desc: "Power BI, Metabase y Oracle Analytics que convierten tus datos dispersos en información útil para el negocio.",
   },
   {
     icon: Database,
@@ -108,28 +107,6 @@ const stats = [
   { value: "24/7", label: "Monitoreo & soporte" },
 ];
 
-const testimonials = [
-  {
-    quote:
-      "Korventis ordenó nuestra infraestructura y hoy tenemos dashboards que antes tardábamos semanas en armar. Un cambio total.",
-    name: "Carlos M.",
-    role: "Director de Operaciones, Retail",
-  },
-  {
-    quote:
-      "Automatizaron procesos administrativos que consumían horas diarias. El retorno fue inmediato y medible.",
-    name: "Andrea P.",
-    role: "Gerente Financiera, Manufactura",
-  },
-  {
-    quote:
-      "Combinan lo técnico y lo contable como pocos. Nos dieron claridad para tomar mejores decisiones.",
-    name: "Luis R.",
-    role: "CEO, Servicios Logísticos",
-  },
-];
-
-const clients = ["NexaCorp", "Andino Group", "Marlex", "Datacenter RD", "Grupo Vento", "Solaria"];
 
 function Home() {
   return (
@@ -190,24 +167,7 @@ function Home() {
         </Container>
       </section>
 
-      {/* TRUST BAR */}
-      <section className="border-b border-border bg-white py-10">
-        <Container>
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-            Empresas que confían en nosotros
-          </p>
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
-            {clients.map((c) => (
-              <span
-                key={c}
-                className="font-heading text-lg font-bold text-navy/35 transition-colors hover:text-navy/60"
-              >
-                {c}
-              </span>
-            ))}
-          </div>
-        </Container>
-      </section>
+
 
       {/* WHY KORVENTIS */}
       <section className="bg-mist py-24">
@@ -334,7 +294,7 @@ function Home() {
                 variant="light"
                 eyebrow="Indicadores & Business Intelligence"
                 title="Todo tu negocio en un solo panel"
-                subtitle="Dashboards de Power BI que muestran KPIs, ventas, infraestructura y servidores en tiempo real. Menos hojas de cálculo, más decisiones."
+                subtitle="Dashboards en Power BI, Metabase y Oracle Analytics que muestran KPIs e indicadores clave en tiempo real. Menos hojas de cálculo, más decisiones."
                 className="max-w-xl"
               />
               <div className="mt-9 grid grid-cols-2 gap-6">
@@ -368,35 +328,7 @@ function Home() {
         </Container>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="bg-white py-24">
-        <Container>
-          <SectionHeading
-            eyebrow="Testimonios"
-            title="Resultados que hablan por nosotros"
-            subtitle="Empresas que fortalecieron su núcleo operativo con Korventis."
-          />
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {testimonials.map((t, i) => (
-              <Reveal as="article" key={t.name} delay={i * 90}>
-                <div className="flex h-full flex-col rounded-3xl border border-border bg-mist p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card">
-                  <Quote className="h-9 w-9 text-sky/40" />
-                  <div className="mt-4 flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, k) => (
-                      <Star key={k} className="h-4 w-4 fill-sky text-sky" />
-                    ))}
-                  </div>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-navy/80">"{t.quote}"</p>
-                  <div className="mt-6 border-t border-border pt-4">
-                    <div className="font-heading font-semibold text-navy">{t.name}</div>
-                    <div className="text-xs text-muted-foreground">{t.role}</div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
+
 
       {/* CONTACT / CTA */}
       <section className="relative overflow-hidden bg-mist py-24">
