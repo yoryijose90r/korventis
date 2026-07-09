@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrabajaConNosotrosRouteImport } from './routes/trabaja-con-nosotros'
 import { Route as SolucionesRouteImport } from './routes/soluciones'
 import { Route as SobreNosotrosRouteImport } from './routes/sobre-nosotros'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServiciosRouteImport } from './routes/servicios'
 import { Route as PreciosRouteImport } from './routes/precios'
 import { Route as ContactoRouteImport } from './routes/contacto'
@@ -32,6 +33,11 @@ const SolucionesRoute = SolucionesRouteImport.update({
 const SobreNosotrosRoute = SobreNosotrosRouteImport.update({
   id: '/sobre-nosotros',
   path: '/sobre-nosotros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServiciosRoute = ServiciosRouteImport.update({
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/contacto': typeof ContactoRoute
   '/precios': typeof PreciosRoute
   '/servicios': typeof ServiciosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soluciones': typeof SolucionesRoute
   '/trabaja-con-nosotros': typeof TrabajaConNosotrosRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/contacto': typeof ContactoRoute
   '/precios': typeof PreciosRoute
   '/servicios': typeof ServiciosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soluciones': typeof SolucionesRoute
   '/trabaja-con-nosotros': typeof TrabajaConNosotrosRoute
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/contacto': typeof ContactoRoute
   '/precios': typeof PreciosRoute
   '/servicios': typeof ServiciosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soluciones': typeof SolucionesRoute
   '/trabaja-con-nosotros': typeof TrabajaConNosotrosRoute
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/precios'
     | '/servicios'
+    | '/sitemap.xml'
     | '/sobre-nosotros'
     | '/soluciones'
     | '/trabaja-con-nosotros'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/precios'
     | '/servicios'
+    | '/sitemap.xml'
     | '/sobre-nosotros'
     | '/soluciones'
     | '/trabaja-con-nosotros'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/precios'
     | '/servicios'
+    | '/sitemap.xml'
     | '/sobre-nosotros'
     | '/soluciones'
     | '/trabaja-con-nosotros'
@@ -142,6 +154,7 @@ export interface RootRouteChildren {
   ContactoRoute: typeof ContactoRoute
   PreciosRoute: typeof PreciosRoute
   ServiciosRoute: typeof ServiciosRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreNosotrosRoute: typeof SobreNosotrosRoute
   SolucionesRoute: typeof SolucionesRoute
   TrabajaConNosotrosRoute: typeof TrabajaConNosotrosRoute
@@ -168,6 +181,13 @@ declare module '@tanstack/react-router' {
       path: '/sobre-nosotros'
       fullPath: '/sobre-nosotros'
       preLoaderRoute: typeof SobreNosotrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/servicios': {
@@ -222,6 +242,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactoRoute: ContactoRoute,
   PreciosRoute: PreciosRoute,
   ServiciosRoute: ServiciosRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreNosotrosRoute: SobreNosotrosRoute,
   SolucionesRoute: SolucionesRoute,
   TrabajaConNosotrosRoute: TrabajaConNosotrosRoute,
