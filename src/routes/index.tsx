@@ -10,9 +10,8 @@ import {
   ShieldCheck,
   TrendingUp,
   Layers,
-  Quote,
-  Star,
   Building2,
+
 } from "lucide-react";
 import { SiteShell } from "@/components/site/site-shell";
 import { CtaLink } from "@/components/site/cta-button";
