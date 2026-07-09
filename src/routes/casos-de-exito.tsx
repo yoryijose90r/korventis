@@ -24,15 +24,15 @@ export const Route = createFileRoute("/casos-de-exito")({
 
 const cases = [
   {
-    sector: "Retail",
-    title: "Visibilidad total con Business Intelligence",
+    sector: "Money Transfer",
+    title: "Visibilidad de envíos con Business Intelligence",
     challenge:
-      "Datos dispersos en múltiples sistemas y reportes manuales que tardaban semanas en consolidarse.",
+      "Datos de envíos dispersos y reportes manuales que dificultaban ver cantidades y comportamiento en el tiempo.",
     solution:
-      "Modelo de datos unificado y dashboards de Power BI con KPIs de ventas e inventario en tiempo real.",
+      "Dashboards desarrollados en Metabase con indicadores de envíos, cantidades y visibilidad operativa en tiempo real.",
     metrics: [
       { icon: Clock, v: "-85%", l: "Tiempo de reportería" },
-      { icon: TrendingUp, v: "+22%", l: "Rotación de inventario" },
+      { icon: TrendingUp, v: "360°", l: "Visibilidad de envíos" },
     ],
   },
   {
