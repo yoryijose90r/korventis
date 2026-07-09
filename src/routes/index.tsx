@@ -108,28 +108,6 @@ const stats = [
   { value: "24/7", label: "Monitoreo & soporte" },
 ];
 
-const testimonials = [
-  {
-    quote:
-      "Korventis ordenó nuestra infraestructura y hoy tenemos dashboards que antes tardábamos semanas en armar. Un cambio total.",
-    name: "Carlos M.",
-    role: "Director de Operaciones, Retail",
-  },
-  {
-    quote:
-      "Automatizaron procesos administrativos que consumían horas diarias. El retorno fue inmediato y medible.",
-    name: "Andrea P.",
-    role: "Gerente Financiera, Manufactura",
-  },
-  {
-    quote:
-      "Combinan lo técnico y lo contable como pocos. Nos dieron claridad para tomar mejores decisiones.",
-    name: "Luis R.",
-    role: "CEO, Servicios Logísticos",
-  },
-];
-
-const clients = ["NexaCorp", "Andino Group", "Marlex", "Datacenter RD", "Grupo Vento", "Solaria"];
 
 function Home() {
   return (
