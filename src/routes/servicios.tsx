@@ -94,7 +94,7 @@ function Servicios() {
             <span className="text-gradient-brand">transformarse</span>
           </>
         }
-        subtitle="Un portafolio integral que combina infraestructura, datos, automatización, desarrollo y consultoría empresarial bajo un mismo estándar de excelencia."
+        subtitle="Un portafolio integral que combina infraestructura, datos, automatización y consultoría empresarial bajo un mismo estándar de excelencia."
       >
         <CtaLink to="/contacto" variant="white" size="lg">
           Solicitar Diagnóstico <ArrowRight className="h-4 w-4" />
