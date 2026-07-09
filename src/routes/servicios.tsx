@@ -26,7 +26,7 @@ export const Route = createFileRoute("/servicios")({
       {
         name: "description",
         content:
-          "Servicios de Korventis: infraestructura, Oracle, SQL Server, PostgreSQL, Power BI, Business Intelligence, automatización, cloud, Docker, desarrollo y consultoría contable.",
+          "Servicios de Korventis: infraestructura, servidores, virtualización (VMware, Proxmox), cloud en Digital Ocean, Oracle, SQL Server, PostgreSQL, Power BI, Metabase, Oracle Analytics, automatización y consultoría contable.",
       },
       { property: "og:title", content: "Servicios | Korventis" },
       { property: "og:url", content: "/servicios" },
