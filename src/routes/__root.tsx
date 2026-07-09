@@ -77,21 +77,58 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "KORVENTIS | Consultoría en Tecnología, Datos y Negocios" },
+      {
+        name: "description",
+        content:
+          "Korventis transforma operaciones empresariales con infraestructura tecnológica, Business Intelligence, automatización y consultoría contable en el Caribe y Latinoamérica.",
+      },
+      {
+        name: "keywords",
+        content:
+          "consultoría tecnológica, Business Intelligence, infraestructura TI, automatización, bases de datos, Power BI, consultoría contable, transformación digital, Korventis",
+      },
+      { name: "author", content: "Korventis" },
+      { property: "og:title", content: "KORVENTIS | Technology, Data & Business Consulting" },
+      {
+        property: "og:description",
+        content:
+          "Fortalecemos el núcleo de tu empresa con tecnología, datos y estrategia. Infraestructura, BI, automatización y consultoría empresarial.",
+      },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Korventis" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Korventis",
+          slogan: "Technology, Data & Business Consulting",
+          description:
+            "Firma de consultoría que integra tecnología, datos y estrategia empresarial.",
+          areaServed: ["Caribe", "Latinoamérica"],
+          knowsAbout: [
+            "Infraestructura Tecnológica",
+            "Business Intelligence",
+            "Bases de Datos",
+            "Automatización",
+            "Consultoría Contable",
+          ],
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
