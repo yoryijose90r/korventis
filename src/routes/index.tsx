@@ -168,24 +168,7 @@ function Home() {
         </Container>
       </section>
 
-      {/* TRUST BAR */}
-      <section className="border-b border-border bg-white py-10">
-        <Container>
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-            Empresas que confían en nosotros
-          </p>
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
-            {clients.map((c) => (
-              <span
-                key={c}
-                className="font-heading text-lg font-bold text-navy/35 transition-colors hover:text-navy/60"
-              >
-                {c}
-              </span>
-            ))}
-          </div>
-        </Container>
-      </section>
+
 
       {/* WHY KORVENTIS */}
       <section className="bg-mist py-24">
