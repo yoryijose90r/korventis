@@ -54,12 +54,12 @@ const services = [
   {
     icon: Server,
     title: "Infraestructura",
-    desc: "Servidores, redes, virtualización y cloud diseñados para alta disponibilidad y continuidad operativa.",
+    desc: "Servidores, virtualización en VMware y Proxmox, y cloud en Digital Ocean para alta disponibilidad y continuidad operativa.",
   },
   {
     icon: BarChart3,
     title: "Business Intelligence",
-    desc: "Power BI y dashboards que convierten tus datos dispersos en información útil para el negocio.",
+    desc: "Power BI, Metabase y Oracle Analytics que convierten tus datos dispersos en información útil para el negocio.",
   },
   {
     icon: Database,
