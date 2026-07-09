@@ -14,6 +14,7 @@ import { Route as SobreNosotrosRouteImport } from './routes/sobre-nosotros'
 import { Route as ServiciosRouteImport } from './routes/servicios'
 import { Route as PreciosRouteImport } from './routes/precios'
 import { Route as CasosDeExitoRouteImport } from './routes/casos-de-exito'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SolucionesRoute = SolucionesRouteImport.update({
@@ -41,6 +42,11 @@ const CasosDeExitoRoute = CasosDeExitoRouteImport.update({
   path: '/casos-de-exito',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -49,6 +55,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
   '/casos-de-exito': typeof CasosDeExitoRoute
   '/precios': typeof PreciosRoute
   '/servicios': typeof ServiciosRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
   '/casos-de-exito': typeof CasosDeExitoRoute
   '/precios': typeof PreciosRoute
   '/servicios': typeof ServiciosRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
   '/casos-de-exito': typeof CasosDeExitoRoute
   '/precios': typeof PreciosRoute
   '/servicios': typeof ServiciosRoute
@@ -76,6 +85,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/blog'
     | '/casos-de-exito'
     | '/precios'
     | '/servicios'
@@ -84,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/blog'
     | '/casos-de-exito'
     | '/precios'
     | '/servicios'
@@ -92,6 +103,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/blog'
     | '/casos-de-exito'
     | '/precios'
     | '/servicios'
@@ -101,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRoute: typeof BlogRoute
   CasosDeExitoRoute: typeof CasosDeExitoRoute
   PreciosRoute: typeof PreciosRoute
   ServiciosRoute: typeof ServiciosRoute
@@ -145,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CasosDeExitoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -157,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRoute: BlogRoute,
   CasosDeExitoRoute: CasosDeExitoRoute,
   PreciosRoute: PreciosRoute,
   ServiciosRoute: ServiciosRoute,
