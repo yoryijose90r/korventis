@@ -78,14 +78,29 @@ export function Footer() {
         </div>
 
         <div className="mt-12 grid gap-4 border-t border-white/10 pt-8 text-sm text-silver/70 sm:grid-cols-3">
-          <span className="flex items-center gap-2">
-            <Mail className="h-4 w-4 text-sky" /> contacto@korventis.com
+          <span className="flex flex-col gap-1">
+            <a
+              href="mailto:yoryijose90r@gmail.com"
+              className="flex items-center gap-2 transition-colors hover:text-sky"
+            >
+              <Mail className="h-4 w-4 shrink-0 text-sky" /> yoryijose90r@gmail.com
+            </a>
+            <a
+              href="mailto:yomaflorentino@gmail.com"
+              className="flex items-center gap-2 transition-colors hover:text-sky"
+            >
+              <Mail className="h-4 w-4 shrink-0 text-sky" /> yomaflorentino@gmail.com
+            </a>
           </span>
-          <span className="flex items-center gap-2">
-            <Phone className="h-4 w-4 text-sky" /> +1 (809) 000-0000
-          </span>
-          <span className="flex items-center gap-2">
-            <MapPin className="h-4 w-4 text-sky" /> Santo Domingo · Caribe & LATAM
+          <a
+            href="tel:+18296862720"
+            className="flex items-center gap-2 transition-colors hover:text-sky"
+          >
+            <Phone className="h-4 w-4 shrink-0 text-sky" /> +1 (829) 686-2720
+          </a>
+          <span className="flex items-start gap-2">
+            <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sky" /> Carmen Renata 3, Pantoja, Santo
+            Domingo 10701, RD
           </span>
         </div>
 

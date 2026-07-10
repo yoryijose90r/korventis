@@ -1,26 +1,28 @@
 import type { ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
-import { Home } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { Navbar } from "./navbar";
 import { Footer } from "./footer";
 
 export function SiteShell({ children }: { children: ReactNode }) {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />
 
-      {/* Floating "back to home" button — quick access, especially on mobile */}
-      <Link
-        to="/"
-        activeOptions={{ exact: true }}
-        aria-label="Volver al inicio"
+      {/* Floating "scroll to top" button — quick access, especially on mobile */}
+      <button
+        type="button"
+        onClick={scrollToTop}
+        aria-label="Volver al inicio de la página"
         className="fixed bottom-5 right-5 z-40 grid h-13 w-13 place-items-center rounded-full bg-gradient-brand text-white shadow-glow transition-transform duration-300 hover:scale-110 active:scale-95"
-        activeProps={{ className: "hidden" }}
       >
-        <Home className="h-5 w-5" />
-      </Link>
+        <ArrowUp className="h-5 w-5" />
+      </button>
     </div>
   );
 }
