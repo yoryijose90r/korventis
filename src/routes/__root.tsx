@@ -77,11 +77,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "KORVENTIS | Consultoría en Tecnología, Datos y Negocios" },
+      { title: "KORVENTIS | Transformación Empresarial con Tecnología y Datos" },
       {
         name: "description",
         content:
-          "Korventis transforma operaciones empresariales con infraestructura tecnológica, Business Intelligence, automatización y consultoría contable en el Caribe y Latinoamérica.",
+          "Fortalecemos el núcleo de tu empresa con infraestructura, Business Intelligence, automatización y consultoría contable. Solicita tu diagnóstico gratuito.",
       },
       {
         name: "keywords",
@@ -89,15 +89,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "consultoría tecnológica, Business Intelligence, infraestructura TI, automatización, bases de datos, Power BI, consultoría contable, transformación digital, Korventis",
       },
       { name: "author", content: "Korventis" },
-      { property: "og:title", content: "KORVENTIS | Technology, Data & Business Consulting" },
+      { property: "og:title", content: "KORVENTIS | Transformación Empresarial con Tecnología y Datos" },
       {
         property: "og:description",
         content:
-          "Fortalecemos el núcleo de tu empresa con tecnología, datos y estrategia. Infraestructura, BI, automatización y consultoría empresarial.",
+          "Fortalecemos el núcleo de tu empresa con infraestructura, Business Intelligence, automatización y consultoría contable. Solicita tu diagnóstico gratuito.",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Korventis" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "KORVENTIS | Transformación Empresarial con Tecnología y Datos" },
+      { name: "twitter:description", content: "Fortalecemos el núcleo de tu empresa con infraestructura, Business Intelligence, automatización y consultoría contable. Solicita tu diagnóstico gratuito." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/82ee97e0-e565-44f1-b4e8-01d49f1fad30/id-preview-54ecbd17--27f17379-6348-4a71-8915-2d104df1ceff.lovable.app-1783689047252.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/82ee97e0-e565-44f1-b4e8-01d49f1fad30/id-preview-54ecbd17--27f17379-6348-4a71-8915-2d104df1ceff.lovable.app-1783689047252.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

@@ -31,11 +31,11 @@ export const Route = createFileRoute("/")({
         content:
           "Fortalecemos el núcleo de tu empresa con infraestructura, Business Intelligence, automatización y consultoría contable. Solicita tu diagnóstico gratuito.",
       },
-      { property: "og:title", content: "KORVENTIS | Transformación Empresarial" },
+      { property: "og:title", content: "KORVENTIS | Transformación Empresarial con Tecnología y Datos" },
       {
         property: "og:description",
         content:
-          "Transformamos operaciones empresariales mediante tecnología y datos. Consultoría premium para el Caribe y Latinoamérica.",
+          "Fortalecemos el núcleo de tu empresa con infraestructura, Business Intelligence, automatización y consultoría contable. Solicita tu diagnóstico gratuito.",
       },
       { property: "og:url", content: "/" },
     ],
