@@ -13,19 +13,19 @@ const columns = [
     ],
   },
   {
-    title: "Servicios",
+    title: "Soluciones",
     links: [
-      { to: "/servicios", label: "Infraestructura & Cloud" },
-      { to: "/servicios", label: "Business Intelligence" },
-      { to: "/servicios", label: "Automatización" },
-      { to: "/servicios", label: "Consultoría Contable" },
+      { to: "/soluciones", label: "Transformación Empresarial" },
+      { to: "/soluciones", label: "Gestión Administrativa y Contable" },
+      { to: "/soluciones", label: "Inteligencia de Negocios" },
+      { to: "/soluciones", label: "Consultoría Estratégica" },
     ],
   },
   {
     title: "Recursos",
     links: [
-      { to: "/soluciones", label: "Soluciones" },
-      { to: "/precios", label: "Precios" },
+      { to: "/precios", label: "Planes" },
+      { to: "/casos-de-exito", label: "Casos de Éxito" },
       { to: "/contacto", label: "Contacto" },
     ],
   },
@@ -39,8 +39,8 @@ export function Footer() {
           <div className="max-w-sm">
             <Logo variant="light" />
             <p className="mt-5 text-sm leading-relaxed text-silver/80">
-              Fortalecemos el núcleo de tu empresa integrando tecnología, datos y estrategia para
-              impulsar organizaciones más eficientes, competitivas y sostenibles.
+              Consultoría de transformación empresarial y digital. Ayudamos a pequeñas y medianas
+              empresas a ser más eficientes, organizadas y preparadas para crecer.
             </p>
             <div className="mt-6 flex gap-3">
               {[Linkedin, Twitter, Facebook].map((Icon, i) => (

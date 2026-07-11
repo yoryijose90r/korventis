@@ -1,17 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  Server,
+  Rocket,
   BarChart3,
-  Database,
-  Workflow,
-  Calculator,
-  Cpu,
-  ArrowRight,
+  ClipboardList,
+  Compass,
   ShieldCheck,
+  ArrowRight,
   TrendingUp,
-  Layers,
+  Handshake,
+  Target,
   Building2,
-
 } from "lucide-react";
 import { SiteShell } from "@/components/site/site-shell";
 import { CtaLink } from "@/components/site/cta-button";
@@ -25,17 +23,17 @@ import meetingImg from "@/assets/meeting.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "KORVENTIS | Transformación Empresarial con Tecnología y Datos" },
+      { title: "KORVENTIS | Consultoría de Transformación Empresarial y Digital" },
       {
         name: "description",
         content:
-          "Fortalecemos el núcleo de tu empresa con infraestructura, Business Intelligence, automatización y consultoría contable. Solicita tu diagnóstico gratuito.",
+          "Ayudamos a pequeñas y medianas empresas de Latinoamérica y el Caribe a ser más eficientes, organizadas y preparadas para crecer mediante consultoría estratégica y soluciones digitales.",
       },
-      { property: "og:title", content: "KORVENTIS | Transformación Empresarial con Tecnología y Datos" },
+      { property: "og:title", content: "KORVENTIS | Consultoría de Transformación Empresarial y Digital" },
       {
         property: "og:description",
         content:
-          "Fortalecemos el núcleo de tu empresa con infraestructura, Business Intelligence, automatización y consultoría contable. Solicita tu diagnóstico gratuito.",
+          "Optimizamos la gestión administrativa, fortalecemos procesos y convertimos tu información en mejores decisiones. Agenda una consulta estratégica.",
       },
       { property: "og:url", content: "/" },
     ],
@@ -44,49 +42,44 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const services = [
+const solutions = [
   {
-    icon: Layers,
-    title: "Transformación Operativa",
-    desc: "Rediseñamos y ordenamos tus procesos para lograr eficiencia, continuidad y decisiones más inteligentes.",
+    icon: Rocket,
+    title: "Transformación Empresarial",
+    desc: "Modernizamos tu operación con estrategias que optimizan procesos, reducen tareas manuales y fortalecen la gestión organizacional.",
   },
   {
-    icon: Server,
-    title: "Infraestructura",
-    desc: "Servidores, virtualización en VMware y Proxmox, y cloud en Digital Ocean para alta disponibilidad y continuidad operativa.",
+    icon: ClipboardList,
+    title: "Gestión Administrativa y Contable",
+    desc: "Ordenamos y digitalizamos tus procesos administrativos y financieros para una operación clara, controlada y confiable.",
   },
   {
     icon: BarChart3,
-    title: "Business Intelligence",
-    desc: "Power BI, Metabase y Oracle Analytics que convierten tus datos dispersos en información útil para el negocio.",
+    title: "Inteligencia de Negocios",
+    desc: "Convertimos tu información en indicadores y reportes claros que respaldan mejores decisiones gerenciales.",
   },
   {
-    icon: Database,
-    title: "Bases de Datos",
-    desc: "Administración experta de Oracle, SQL Server y PostgreSQL: rendimiento, seguridad e integridad.",
+    icon: Compass,
+    title: "Consultoría Estratégica",
+    desc: "Acompañamos la planificación de tus proyectos de transformación para que cada inversión genere valor real para el negocio.",
   },
   {
-    icon: Workflow,
-    title: "Automatización",
-    desc: "Eliminamos tareas manuales y conectamos tus sistemas para reducir errores y costos operativos.",
-  },
-  {
-    icon: Calculator,
-    title: "Consultoría Contable",
-    desc: "Control financiero, procesos administrativos y asesoría empresarial con enfoque estratégico.",
+    icon: ShieldCheck,
+    title: "Gestión de Infraestructura Empresarial",
+    desc: "Aseguramos continuidad, disponibilidad y estabilidad para que tu empresa opere sin interrupciones y pueda crecer.",
   },
 ];
 
 const whyKorventis = [
   {
-    icon: Cpu,
-    title: "Tecnología + Estrategia",
-    desc: "No vendemos soporte técnico: integramos tecnología, datos y estrategia empresarial en una sola firma.",
+    icon: Handshake,
+    title: "Aliado Estratégico",
+    desc: "No vendemos tecnología: entendemos tu negocio y trabajamos a tu lado para hacerlo más eficiente y rentable.",
   },
   {
-    icon: ShieldCheck,
-    title: "Continuidad Operativa",
-    desc: "Diseñamos operaciones estables y resilientes para que tu empresa nunca se detenga.",
+    icon: Building2,
+    title: "Enfoque Empresarial",
+    desc: "Hablamos el idioma de la gerencia: resultados, organización, control y crecimiento sostenible.",
   },
   {
     icon: TrendingUp,
@@ -94,19 +87,18 @@ const whyKorventis = [
     desc: "Transformamos información dispersa en indicadores claros para decidir con confianza.",
   },
   {
-    icon: Building2,
-    title: "Experiencia Real",
-    desc: "Años de trabajo directo en infraestructura, bases de datos, analítica y procesos empresariales.",
+    icon: Target,
+    title: "Resultados Medibles",
+    desc: "Cada proyecto se orienta a mejoras concretas: más eficiencia, menos errores y mayor productividad.",
   },
 ];
 
 const stats = [
-  { value: "99.9%", label: "Continuidad operativa" },
   { value: "+40%", label: "Eficiencia en procesos" },
-  { value: "360°", label: "Visibilidad de datos" },
-  { value: "24/7", label: "Monitoreo & soporte" },
+  { value: "-30%", label: "Tareas manuales" },
+  { value: "360°", label: "Visibilidad del negocio" },
+  { value: "100%", label: "Acompañamiento" },
 ];
-
 
 function Home() {
   return (
@@ -115,7 +107,7 @@ function Home() {
       <section className="relative flex min-h-screen items-center overflow-hidden">
         <img
           src={heroImg}
-          alt="Centro de datos e infraestructura tecnológica de Korventis"
+          alt="Consultores de Korventis impulsando la transformación empresarial"
           width={1920}
           height={1280}
           className="absolute inset-0 h-full w-full object-cover"
@@ -127,27 +119,28 @@ function Home() {
         <Container className="relative z-10 py-32">
           <div className="max-w-3xl">
             <Reveal>
-              <Eyebrow variant="light">Technology · Data · Business Consulting</Eyebrow>
+              <Eyebrow variant="light">Consultoría de Transformación Empresarial y Digital</Eyebrow>
             </Reveal>
             <Reveal delay={80}>
               <h1 className="mt-6 text-4xl font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
-                Transformamos operaciones empresariales mediante{" "}
-                <span className="text-gradient-brand">tecnología y datos</span>.
+                Transformamos empresas para que sean más{" "}
+                <span className="text-gradient-brand">eficientes, organizadas</span> y preparadas para crecer.
               </h1>
             </Reveal>
             <Reveal delay={160}>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-silver/90">
-                Ayudamos a empresas a fortalecer su infraestructura tecnológica, optimizar procesos,
-                implementar Business Intelligence y tomar mejores decisiones.
+                Ayudamos a empresas de Latinoamérica y el Caribe a optimizar su gestión
+                administrativa, fortalecer sus procesos, aprovechar mejor su información y acelerar su
+                crecimiento mediante consultoría estratégica y soluciones digitales.
               </p>
             </Reveal>
             <Reveal delay={240}>
               <div className="mt-9 flex flex-wrap gap-4">
                 <CtaLink to="/contacto" variant="primary" size="lg">
-                  Solicitar Diagnóstico <ArrowRight className="h-4 w-4" />
+                  Agenda una consulta estratégica <ArrowRight className="h-4 w-4" />
                 </CtaLink>
-                <CtaLink to="/servicios" variant="ghostLight" size="lg">
-                  Comenzar Proyecto
+                <CtaLink to="/soluciones" variant="ghostLight" size="lg">
+                  Conoce nuestras soluciones
                 </CtaLink>
               </div>
             </Reveal>
@@ -167,15 +160,13 @@ function Home() {
         </Container>
       </section>
 
-
-
       {/* WHY KORVENTIS */}
       <section className="bg-mist py-24">
         <Container>
           <SectionHeading
             eyebrow="¿Por qué Korventis?"
-            title="El núcleo de tu empresa, más fuerte que nunca"
-            subtitle="Korventis representa el Core de las operaciones y el movimiento (Ventis) hacia el crecimiento. Así impulsamos tu transformación."
+            title="Un aliado que entiende tu negocio"
+            subtitle="No somos una empresa de soporte técnico. Somos tu socio estratégico para organizar, optimizar y hacer crecer tu empresa."
           />
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {whyKorventis.map((item, i) => (
@@ -197,16 +188,16 @@ function Home() {
         </Container>
       </section>
 
-      {/* SERVICES */}
+      {/* SOLUTIONS */}
       <section className="bg-white py-24">
         <Container>
           <SectionHeading
-            eyebrow="Nuestros Servicios"
-            title="Soluciones integrales para transformar tu operación"
-            subtitle="Una firma que combina infraestructura, datos, automatización y consultoría estratégica bajo un mismo estándar de excelencia."
+            eyebrow="Nuestras Soluciones"
+            title="Cinco formas de hacer que tu empresa funcione mejor"
+            subtitle="Combinamos consultoría, organización y tecnología para resolver los retos reales de tu operación."
           />
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((s, i) => (
+            {solutions.map((s, i) => (
               <Reveal as="article" key={s.title} delay={(i % 3) * 90}>
                 <div className="group relative h-full overflow-hidden rounded-3xl border border-border bg-white p-8 shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:border-sky/40 hover:shadow-elevated">
                   <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-sky/5 transition-transform duration-500 group-hover:scale-150" />
@@ -219,7 +210,7 @@ function Home() {
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
                     <Link
-                      to="/servicios"
+                      to="/soluciones"
                       className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-sky transition-all hover:gap-3"
                     >
                       Conocer más <ArrowRight className="h-4 w-4" />
@@ -228,6 +219,11 @@ function Home() {
                 </div>
               </Reveal>
             ))}
+          </div>
+          <div className="mt-12 text-center">
+            <CtaLink to="/soluciones" variant="navy" size="lg">
+              Descubre oportunidades de mejora <ArrowRight className="h-4 w-4" />
+            </CtaLink>
           </div>
         </Container>
       </section>
@@ -252,17 +248,17 @@ function Home() {
             <div>
               <SectionHeading
                 align="left"
-                eyebrow="Transformación Operativa"
-                title="De procesos dispersos a operaciones inteligentes"
-                subtitle="Muchas organizaciones tienen excelentes profesionales, pero procesos poco organizados, información dispersa y tecnología subutilizada. Nosotros lo cambiamos."
+                eyebrow="Cómo ayudamos"
+                title="De una operación dispersa a una empresa organizada"
+                subtitle="Muchas organizaciones tienen excelentes personas, pero procesos poco ordenados e información dispersa. Nosotros ponemos orden y claridad."
                 className="max-w-xl"
               />
               <ul className="mt-8 space-y-4">
                 {[
-                  "Diagnóstico integral de tu operación tecnológica y administrativa",
-                  "Automatización de procesos manuales y repetitivos",
-                  "Datos convertidos en indicadores accionables",
-                  "Acompañamiento estratégico durante todo el crecimiento",
+                  "Diagnóstico integral de tu operación administrativa y de negocio",
+                  "Procesos más ágiles, con menos tareas manuales y errores",
+                  "Información convertida en indicadores para decidir mejor",
+                  "Acompañamiento estratégico durante todo tu crecimiento",
                 ].map((point) => (
                   <li key={point} className="flex items-start gap-3">
                     <span className="mt-1 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sky/15 text-sky">
@@ -273,7 +269,7 @@ function Home() {
                 ))}
               </ul>
               <CtaLink to="/soluciones" variant="navy" size="lg" className="mt-9">
-                Explorar Soluciones <ArrowRight className="h-4 w-4" />
+                Conversemos sobre tu empresa <ArrowRight className="h-4 w-4" />
               </CtaLink>
             </div>
           </div>
@@ -292,9 +288,9 @@ function Home() {
               <SectionHeading
                 align="left"
                 variant="light"
-                eyebrow="Indicadores & Business Intelligence"
+                eyebrow="Inteligencia de Negocios"
                 title="Todo tu negocio en un solo panel"
-                subtitle="Dashboards en Power BI, Metabase y Oracle Analytics que muestran KPIs e indicadores clave en tiempo real. Menos hojas de cálculo, más decisiones."
+                subtitle="Dashboards ejecutivos e indicadores que muestran lo que realmente importa, en tiempo real. Menos hojas de cálculo, más decisiones acertadas."
                 className="max-w-xl"
               />
               <div className="mt-9 grid grid-cols-2 gap-6">
@@ -316,7 +312,7 @@ function Home() {
                 <div className="absolute -inset-3 -z-10 rounded-[2rem] bg-sky/25 blur-2xl" />
                 <img
                   src={dashboardImg}
-                  alt="Dashboard de Business Intelligence con KPIs y métricas de servidores"
+                  alt="Panel ejecutivo con indicadores clave del negocio"
                   width={1408}
                   height={1008}
                   loading="lazy"
@@ -328,8 +324,6 @@ function Home() {
         </Container>
       </section>
 
-
-
       {/* CONTACT / CTA */}
       <section className="relative overflow-hidden bg-mist py-24">
         <Container>
@@ -338,14 +332,14 @@ function Home() {
               <SectionHeading
                 align="left"
                 eyebrow="Comienza hoy"
-                title="Solicita tu diagnóstico empresarial"
-                subtitle="Cuéntanos sobre tu operación y te mostraremos cómo tecnología, datos y estrategia pueden fortalecer el núcleo de tu empresa."
+                title="Agenda una consulta estratégica"
+                subtitle="Cuéntanos sobre tu empresa y te mostraremos oportunidades concretas para organizarla, hacerla más eficiente y prepararla para crecer."
                 className="max-w-xl"
               />
               <div className="mt-8 space-y-5">
                 {[
-                  { t: "Diagnóstico sin costo", d: "Evaluamos tu situación actual y oportunidades." },
-                  { t: "Plan a tu medida", d: "Propuesta clara, medible y ejecutable." },
+                  { t: "Primera conversación sin costo", d: "Entendemos tu situación actual y tus objetivos." },
+                  { t: "Plan a tu medida", d: "Una propuesta clara, medible y ejecutable." },
                   { t: "Acompañamiento real", d: "Un equipo dedicado a tu transformación." },
                 ].map((item) => (
                   <div key={item.t} className="flex items-start gap-4">
