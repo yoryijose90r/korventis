@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { to: "/sobre-nosotros", label: "Nosotros" },
   { to: "/soluciones", label: "Soluciones" },
   { to: "/casos-de-exito", label: "Casos de Éxito" },
-  { to: "/precios", label: "Precios" },
+  { to: "/precios", label: "Planes" },
   { to: "/blog", label: "Blog" },
   { to: "/trabaja-con-nosotros", label: "Trabaja con Nosotros" },
 ] as const;

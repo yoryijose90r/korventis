@@ -39,8 +39,8 @@ export function Footer() {
           <div className="max-w-sm">
             <Logo variant="light" />
             <p className="mt-5 text-sm leading-relaxed text-silver/80">
-              Fortalecemos el núcleo de tu empresa integrando tecnología, datos y estrategia para
-              impulsar organizaciones más eficientes, competitivas y sostenibles.
+              Consultoría de transformación empresarial y digital. Ayudamos a pequeñas y medianas
+              empresas a ser más eficientes, organizadas y preparadas para crecer.
             </p>
             <div className="mt-6 flex gap-3">
               {[Linkedin, Twitter, Facebook].map((Icon, i) => (
