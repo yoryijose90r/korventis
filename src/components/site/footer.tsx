@@ -13,19 +13,19 @@ const columns = [
     ],
   },
   {
-    title: "Servicios",
+    title: "Soluciones",
     links: [
-      { to: "/servicios", label: "Infraestructura & Cloud" },
-      { to: "/servicios", label: "Business Intelligence" },
-      { to: "/servicios", label: "Automatización" },
-      { to: "/servicios", label: "Consultoría Contable" },
+      { to: "/soluciones", label: "Transformación Empresarial" },
+      { to: "/soluciones", label: "Gestión Administrativa y Contable" },
+      { to: "/soluciones", label: "Inteligencia de Negocios" },
+      { to: "/soluciones", label: "Consultoría Estratégica" },
     ],
   },
   {
     title: "Recursos",
     links: [
-      { to: "/soluciones", label: "Soluciones" },
-      { to: "/precios", label: "Precios" },
+      { to: "/precios", label: "Planes" },
+      { to: "/casos-de-exito", label: "Casos de Éxito" },
       { to: "/contacto", label: "Contacto" },
     ],
   },
