@@ -7,7 +7,7 @@ const columns = [
     title: "Compañía",
     links: [
       { to: "/sobre-nosotros", label: "Sobre Nosotros" },
-      { to: "/casos-de-exito", label: "Casos de Éxito" },
+      { to: "/nuestra-experiencia", label: "Nuestra Experiencia" },
       { to: "/trabaja-con-nosotros", label: "Trabaja con Nosotros" },
       { to: "/blog", label: "Blog" },
     ],
@@ -25,7 +25,7 @@ const columns = [
     title: "Recursos",
     links: [
       { to: "/precios", label: "Planes" },
-      { to: "/casos-de-exito", label: "Casos de Éxito" },
+      { to: "/nuestra-experiencia", label: "Nuestra Experiencia" },
       { to: "/contacto", label: "Contacto" },
     ],
   },

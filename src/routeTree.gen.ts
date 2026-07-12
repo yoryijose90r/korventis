@@ -15,6 +15,7 @@ import { Route as SobreNosotrosRouteImport } from './routes/sobre-nosotros'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServiciosRouteImport } from './routes/servicios'
 import { Route as PreciosRouteImport } from './routes/precios'
+import { Route as NuestraExperienciaRouteImport } from './routes/nuestra-experiencia'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as CasosDeExitoRouteImport } from './routes/casos-de-exito'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -50,6 +51,11 @@ const PreciosRoute = PreciosRouteImport.update({
   path: '/precios',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NuestraExperienciaRoute = NuestraExperienciaRouteImport.update({
+  id: '/nuestra-experiencia',
+  path: '/nuestra-experiencia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactoRoute = ContactoRouteImport.update({
   id: '/contacto',
   path: '/contacto',
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRoute
   '/casos-de-exito': typeof CasosDeExitoRoute
   '/contacto': typeof ContactoRoute
+  '/nuestra-experiencia': typeof NuestraExperienciaRoute
   '/precios': typeof PreciosRoute
   '/servicios': typeof ServiciosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -88,6 +95,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogRoute
   '/casos-de-exito': typeof CasosDeExitoRoute
   '/contacto': typeof ContactoRoute
+  '/nuestra-experiencia': typeof NuestraExperienciaRoute
   '/precios': typeof PreciosRoute
   '/servicios': typeof ServiciosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -101,6 +109,7 @@ export interface FileRoutesById {
   '/blog': typeof BlogRoute
   '/casos-de-exito': typeof CasosDeExitoRoute
   '/contacto': typeof ContactoRoute
+  '/nuestra-experiencia': typeof NuestraExperienciaRoute
   '/precios': typeof PreciosRoute
   '/servicios': typeof ServiciosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/casos-de-exito'
     | '/contacto'
+    | '/nuestra-experiencia'
     | '/precios'
     | '/servicios'
     | '/sitemap.xml'
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/casos-de-exito'
     | '/contacto'
+    | '/nuestra-experiencia'
     | '/precios'
     | '/servicios'
     | '/sitemap.xml'
@@ -139,6 +150,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/casos-de-exito'
     | '/contacto'
+    | '/nuestra-experiencia'
     | '/precios'
     | '/servicios'
     | '/sitemap.xml'
@@ -152,6 +164,7 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRoute
   CasosDeExitoRoute: typeof CasosDeExitoRoute
   ContactoRoute: typeof ContactoRoute
+  NuestraExperienciaRoute: typeof NuestraExperienciaRoute
   PreciosRoute: typeof PreciosRoute
   ServiciosRoute: typeof ServiciosRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -204,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PreciosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/nuestra-experiencia': {
+      id: '/nuestra-experiencia'
+      path: '/nuestra-experiencia'
+      fullPath: '/nuestra-experiencia'
+      preLoaderRoute: typeof NuestraExperienciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contacto': {
       id: '/contacto'
       path: '/contacto'
@@ -240,6 +260,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRoute,
   CasosDeExitoRoute: CasosDeExitoRoute,
   ContactoRoute: ContactoRoute,
+  NuestraExperienciaRoute: NuestraExperienciaRoute,
   PreciosRoute: PreciosRoute,
   ServiciosRoute: ServiciosRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
@@ -250,13 +271,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
