@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { to: "/", label: "Inicio" },
   { to: "/sobre-nosotros", label: "Nosotros" },
   { to: "/soluciones", label: "Soluciones" },
-  { to: "/casos-de-exito", label: "Casos de Éxito" },
+  { to: "/nuestra-experiencia", label: "Nuestra Experiencia" },
   { to: "/precios", label: "Planes" },
   { to: "/blog", label: "Blog" },
   { to: "/trabaja-con-nosotros", label: "Trabaja con Nosotros" },
