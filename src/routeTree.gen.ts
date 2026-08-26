@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TrabajaConNosotrosRouteImport } from './routes/trabaja-con-nosotros'
 import { Route as SolucionesRouteImport } from './routes/soluciones'
 import { Route as SobreNosotrosRouteImport } from './routes/sobre-nosotros'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -17,14 +16,8 @@ import { Route as ServiciosRouteImport } from './routes/servicios'
 import { Route as PreciosRouteImport } from './routes/precios'
 import { Route as NuestraExperienciaRouteImport } from './routes/nuestra-experiencia'
 import { Route as ContactoRouteImport } from './routes/contacto'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 
-const TrabajaConNosotrosRoute = TrabajaConNosotrosRouteImport.update({
-  id: '/trabaja-con-nosotros',
-  path: '/trabaja-con-nosotros',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SolucionesRoute = SolucionesRouteImport.update({
   id: '/soluciones',
   path: '/soluciones',
@@ -60,11 +53,6 @@ const ContactoRoute = ContactoRouteImport.update({
   path: '/contacto',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -73,7 +61,6 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
   '/contacto': typeof ContactoRoute
   '/nuestra-experiencia': typeof NuestraExperienciaRoute
   '/precios': typeof PreciosRoute
@@ -81,11 +68,9 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soluciones': typeof SolucionesRoute
-  '/trabaja-con-nosotros': typeof TrabajaConNosotrosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
   '/contacto': typeof ContactoRoute
   '/nuestra-experiencia': typeof NuestraExperienciaRoute
   '/precios': typeof PreciosRoute
@@ -93,12 +78,10 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soluciones': typeof SolucionesRoute
-  '/trabaja-con-nosotros': typeof TrabajaConNosotrosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
   '/contacto': typeof ContactoRoute
   '/nuestra-experiencia': typeof NuestraExperienciaRoute
   '/precios': typeof PreciosRoute
@@ -106,13 +89,11 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soluciones': typeof SolucionesRoute
-  '/trabaja-con-nosotros': typeof TrabajaConNosotrosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/blog'
     | '/contacto'
     | '/nuestra-experiencia'
     | '/precios'
@@ -120,11 +101,9 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre-nosotros'
     | '/soluciones'
-    | '/trabaja-con-nosotros'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/blog'
     | '/contacto'
     | '/nuestra-experiencia'
     | '/precios'
@@ -132,11 +111,9 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre-nosotros'
     | '/soluciones'
-    | '/trabaja-con-nosotros'
   id:
     | '__root__'
     | '/'
-    | '/blog'
     | '/contacto'
     | '/nuestra-experiencia'
     | '/precios'
@@ -144,12 +121,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre-nosotros'
     | '/soluciones'
-    | '/trabaja-con-nosotros'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BlogRoute: typeof BlogRoute
   ContactoRoute: typeof ContactoRoute
   NuestraExperienciaRoute: typeof NuestraExperienciaRoute
   PreciosRoute: typeof PreciosRoute
@@ -157,18 +132,10 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreNosotrosRoute: typeof SobreNosotrosRoute
   SolucionesRoute: typeof SolucionesRoute
-  TrabajaConNosotrosRoute: typeof TrabajaConNosotrosRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/trabaja-con-nosotros': {
-      id: '/trabaja-con-nosotros'
-      path: '/trabaja-con-nosotros'
-      fullPath: '/trabaja-con-nosotros'
-      preLoaderRoute: typeof TrabajaConNosotrosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/soluciones': {
       id: '/soluciones'
       path: '/soluciones'
@@ -218,13 +185,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -237,7 +197,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BlogRoute: BlogRoute,
   ContactoRoute: ContactoRoute,
   NuestraExperienciaRoute: NuestraExperienciaRoute,
   PreciosRoute: PreciosRoute,
@@ -245,7 +204,6 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreNosotrosRoute: SobreNosotrosRoute,
   SolucionesRoute: SolucionesRoute,
-  TrabajaConNosotrosRoute: TrabajaConNosotrosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
