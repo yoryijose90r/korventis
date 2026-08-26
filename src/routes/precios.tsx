@@ -26,19 +26,19 @@ export const Route = createFileRoute("/precios")({
 const plans = [
   {
     name: "Diagnóstico Empresarial",
-    from: "Desde USD 99",
+    from: "Desde USD 450",
     tagline: "El primer paso para entender dónde mejorar.",
     features: [
       "Evaluación de tu operación actual",
       "Identificación de oportunidades de mejora",
-      "Informe con recomendaciones claras",
+      "Informe con recomendaciones priorizadas",
       "Sesión de resultados con la gerencia",
     ],
     highlight: false,
   },
   {
     name: "Impulso Empresarial",
-    from: "Desde USD 299",
+    from: "Desde USD 1,500",
     tagline: "Orden y eficiencia para operar mejor.",
     features: [
       "Optimización de procesos clave",
@@ -50,7 +50,7 @@ const plans = [
   },
   {
     name: "Crecimiento Empresarial",
-    from: "Desde USD 799",
+    from: "Desde USD 4,500",
     tagline: "Estructura y datos para escalar con control.",
     features: [
       "Mejora integral de procesos administrativos",
@@ -168,7 +168,13 @@ function Precios() {
             ))}
           </div>
 
-          <p className="mx-auto mt-14 max-w-2xl text-center text-sm text-muted-foreground">
+          <p className="mx-auto mt-14 max-w-3xl text-center text-sm text-muted-foreground">
+            Los valores mostrados son precios de referencia actualizados y corresponden al punto de
+            partida de cada plan. La inversión final depende del tamaño de la empresa, el volumen de
+            operaciones, el alcance del proyecto y el nivel de acompañamiento requerido, y puede
+            variar según las condiciones del mercado al momento de la propuesta.
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-muted-foreground">
             ¿No sabes por dónde empezar? Conversemos sobre tu empresa y te recomendaremos el camino
             ideal para organizarla y hacerla crecer.
           </p>

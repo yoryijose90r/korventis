@@ -12,7 +12,7 @@ export const Route = createFileRoute("/contacto")({
       {
         name: "description",
         content:
-          "Contacta a Korventis y solicita un diagnóstico empresarial sin costo. Tecnología, datos y consultoría para transformar tu operación.",
+          "Contacta a Korventis y solicita tu diagnóstico empresarial. Tecnología, datos y consultoría para transformar tu operación.",
       },
       { property: "og:title", content: "Contacto | Korventis" },
       { property: "og:url", content: "/contacto" },
@@ -23,10 +23,10 @@ export const Route = createFileRoute("/contacto")({
 });
 
 const info = [
-  { icon: Mail, t: "Correo", v: "contacto@korventis.com", d: "Respondemos en menos de 24h" },
-  { icon: Phone, t: "Teléfono", v: "+1 (809) 000-0000", d: "Lun a Vie, 8am - 6pm" },
+  { icon: Mail, t: "Correo", v: "contacto@korventis.net", d: "Respondemos en menos de 24h" },
+  { icon: Phone, t: "Teléfono", v: "+1 (829) 686-2720", d: "Lun a Vie, 9am - 5pm" },
   { icon: MapPin, t: "Ubicación", v: "Santo Domingo", d: "Caribe & Latinoamérica" },
-  { icon: Clock, t: "Horario", v: "8:00 - 18:00", d: "Soporte 24/7 para clientes Enterprise" },
+  { icon: Clock, t: "Horario", v: "9:00 - 17:00", d: "Lunes a viernes" },
 ];
 
 function Contacto() {
@@ -76,10 +76,11 @@ function Contacto() {
                     <MessageSquare className="h-5 w-5" />
                   </span>
                   <div>
-                    <div className="font-heading font-semibold">Diagnóstico sin costo</div>
+                    <div className="font-heading font-semibold">Diagnóstico empresarial</div>
                     <p className="mt-1 text-sm text-silver/80">
-                      Evaluamos tu operación actual y te mostramos oportunidades concretas de mejora,
-                      sin compromiso.
+                      En la sesión inicial compartimos una muestra de los hallazgos (aprox. 20% de
+                      las oportunidades detectadas) para que veas el valor real. El informe completo,
+                      con el plan de mejora detallado, forma parte del servicio de diagnóstico.
                     </p>
                   </div>
                 </div>

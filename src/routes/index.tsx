@@ -338,7 +338,7 @@ function Home() {
               />
               <div className="mt-8 space-y-5">
                 {[
-                  { t: "Primera conversación sin costo", d: "Entendemos tu situación actual y tus objetivos." },
+                  { t: "Primera conversación exploratoria", d: "Entendemos tu situación actual y tus objetivos." },
                   { t: "Plan a tu medida", d: "Una propuesta clara, medible y ejecutable." },
                   { t: "Acompañamiento real", d: "Un equipo dedicado a tu transformación." },
                 ].map((item) => (
