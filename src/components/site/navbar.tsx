@@ -11,8 +11,7 @@ const NAV_LINKS = [
   { to: "/soluciones", label: "Soluciones" },
   { to: "/nuestra-experiencia", label: "Nuestra Experiencia" },
   { to: "/precios", label: "Planes" },
-  { to: "/blog", label: "Blog" },
-  { to: "/trabaja-con-nosotros", label: "Trabaja con Nosotros" },
+  { to: "/contacto", label: "Contacto" },
 ] as const;
 
 export function Navbar() {

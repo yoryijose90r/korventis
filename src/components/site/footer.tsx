@@ -8,8 +8,8 @@ const columns = [
     links: [
       { to: "/sobre-nosotros", label: "Sobre Nosotros" },
       { to: "/nuestra-experiencia", label: "Nuestra Experiencia" },
-      { to: "/trabaja-con-nosotros", label: "Trabaja con Nosotros" },
-      { to: "/blog", label: "Blog" },
+      { to: "/soluciones", label: "Soluciones" },
+      { to: "/contacto", label: "Contacto" },
     ],
   },
   {
@@ -80,16 +80,16 @@ export function Footer() {
         <div className="mt-12 grid gap-4 border-t border-white/10 pt-8 text-sm text-silver/70 sm:grid-cols-3">
           <span className="flex flex-col gap-1">
             <a
-              href="mailto:yoryijose90r@gmail.com"
+              href="mailto:contacto@korventis.net"
               className="flex items-center gap-2 transition-colors hover:text-sky"
             >
-              <Mail className="h-4 w-4 shrink-0 text-sky" /> yoryijose90r@gmail.com
+              <Mail className="h-4 w-4 shrink-0 text-sky" /> contacto@korventis.net
             </a>
             <a
-              href="mailto:yomaflorentino@gmail.com"
+              href="mailto:info@korventis.net"
               className="flex items-center gap-2 transition-colors hover:text-sky"
             >
-              <Mail className="h-4 w-4 shrink-0 text-sky" /> yomaflorentino@gmail.com
+              <Mail className="h-4 w-4 shrink-0 text-sky" /> info@korventis.net
             </a>
           </span>
           <a

@@ -7,7 +7,7 @@ const services = [
   "Business Intelligence",
   "Bases de Datos",
   "Automatización",
-  "Desarrollo de Software",
+  "Agentes con IA (secretaria / asistente virtual)",
   "Consultoría Contable",
   "Otro",
 ];
