@@ -1,40 +1,29 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  Rocket,
-  BarChart3,
-  ClipboardList,
-  Compass,
-  ShieldCheck,
-  ArrowRight,
-  TrendingUp,
-  Handshake,
-  Target,
-  Building2,
-} from "lucide-react";
+import { ArrowRight, BarChart3, Bot, BriefcaseBusiness, Building2, Check, ChevronDown, Database, FileCheck2, Handshake, Landmark, Network, ReceiptText, ShieldCheck, Target, TrendingUp, Users } from "lucide-react";
 import { SiteShell } from "@/components/site/site-shell";
 import { CtaLink } from "@/components/site/cta-button";
 import { Reveal } from "@/components/site/reveal";
 import { Eyebrow, SectionHeading, Container } from "@/components/site/primitives";
-import { ContactForm } from "@/components/site/contact-form";
+import { QualificationForm } from "@/components/site/qualification-form";
 import heroImg from "@/assets/hero-tech.jpg";
-import dashboardImg from "@/assets/dashboard-bi.jpg";
-import meetingImg from "@/assets/meeting.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "KORVENTIS | Consultoría de Transformación Empresarial y Digital" },
+      { title: "Korventis | Tecnología Empresarial y Contabilidad Fiscal en RD" },
       {
         name: "description",
         content:
-          "Ayudamos a pequeñas y medianas empresas de Latinoamérica y el Caribe a ser más eficientes, organizadas y preparadas para crecer mediante consultoría estratégica y soluciones digitales.",
+          "Firma de consultoría que integra implementación de Odoo 18 RD, bases de datos, automatización, contabilidad, igualas y cumplimiento DGII para empresas dominicanas.",
       },
-      { property: "og:title", content: "KORVENTIS | Consultoría de Transformación Empresarial y Digital" },
+      { property: "og:title", content: "Korventis | Tecnología Empresarial y Contabilidad Fiscal en RD" },
       {
         property: "og:description",
         content:
-          "Optimizamos la gestión administrativa, fortalecemos procesos y convertimos tu información en mejores decisiones. Agenda una consulta estratégica.",
+          "Tecnología empresarial y cumplimiento contable-fiscal en una sola firma especializada para empresas de República Dominicana.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -42,54 +31,26 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const solutions = [
-  {
-    icon: Rocket,
-    title: "Transformación Empresarial",
-    desc: "Modernizamos tu operación con estrategias que optimizan procesos, reducen tareas manuales y fortalecen la gestión organizacional.",
-  },
-  {
-    icon: ClipboardList,
-    title: "Gestión Administrativa y Contable",
-    desc: "Ordenamos y digitalizamos tus procesos administrativos y financieros para una operación clara, controlada y confiable.",
-  },
-  {
-    icon: BarChart3,
-    title: "Inteligencia de Negocios",
-    desc: "Convertimos tu información en indicadores y reportes claros que respaldan mejores decisiones gerenciales.",
-  },
-  {
-    icon: Compass,
-    title: "Consultoría Estratégica",
-    desc: "Acompañamos la planificación de tus proyectos de transformación para que cada inversión genere valor real para el negocio.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Gestión de Infraestructura Empresarial",
-    desc: "Aseguramos continuidad, disponibilidad y estabilidad para que tu empresa opere sin interrupciones y pueda crecer.",
-  },
-];
-
 const whyKorventis = [
   {
     icon: Handshake,
     title: "Aliado Estratégico",
-    desc: "No vendemos tecnología: entendemos tu negocio y trabajamos a tu lado para hacerlo más eficiente y rentable.",
+    desc: "Integramos visión tecnológica y contable para resolver la operación completa, no problemas aislados.",
   },
   {
     icon: Building2,
     title: "Enfoque Empresarial",
-    desc: "Hablamos el idioma de la gerencia: resultados, organización, control y crecimiento sostenible.",
+    desc: "Hablamos el idioma de la gerencia: eficiencia, cumplimiento, control y crecimiento sostenible.",
   },
   {
     icon: TrendingUp,
-    title: "Decisiones con Datos",
-    desc: "Transformamos información dispersa en indicadores claros para decidir con confianza.",
+    title: "Rigor y Cumplimiento",
+    desc: "Combinamos datos confiables, disciplina técnica y conocimiento de la normativa dominicana.",
   },
   {
     icon: Target,
     title: "Resultados Medibles",
-    desc: "Cada proyecto se orienta a mejoras concretas: más eficiencia, menos errores y mayor productividad.",
+    desc: "Cada colaboración busca mejoras concretas: más control, menos errores y una operación preparada para crecer.",
   },
 ];
 
@@ -98,6 +59,58 @@ const stats = [
   { value: "-30%", label: "Tareas manuales" },
   { value: "360°", label: "Visibilidad del negocio" },
   { value: "100%", label: "Acompañamiento" },
+];
+
+const practices = [
+  {
+    id: "tecnologia",
+    icon: Database,
+    eyebrow: "Práctica 01",
+    title: "Tecnología Empresarial",
+    description: "Modernizamos el núcleo digital de tu operación para que la información fluya, los procesos escalen y el negocio mantenga continuidad.",
+    items: ["Odoo 18 RD", "Bases de datos y BI", "Automatización", "Infraestructura"],
+    cta: "Explorar práctica de tecnología",
+  },
+  {
+    id: "contabilidad",
+    icon: ReceiptText,
+    eyebrow: "Práctica 02",
+    title: "Contabilidad y Fiscal RD",
+    description: "Mantenemos tu gestión financiera organizada y en cumplimiento, con información confiable para decidir y crecer.",
+    items: ["Contabilidad e igualas", "Nómina y TSS", "Cumplimiento DGII", "Costos, impuestos y planeación fiscal"],
+    cta: "Explorar práctica contable",
+  },
+];
+
+const modalities = [
+  {
+    title: "Tecnología Empresarial",
+    subtitle: "Odoo 18 RD, datos, automatización e infraestructura",
+    icon: Database,
+    offers: [
+      ["Proyecto de Implementación", "Implementación Odoo, migración, integración y dashboards", "Desde USD $3,000", "Propuesta a medida tras diagnóstico"],
+      ["Acompañamiento Continuo", "Soporte, mejoras, evolución mensual y hosting VPS", "Desde USD $300/mes", "Contrato mensual según usuarios y SLA"],
+      ["Servicios Especializados", "Auditoría de bases de datos, optimización, capacitación y reportes puntuales", "USD $60 – $120/hora", "Bolsa de horas o entregable fijo"],
+    ],
+  },
+  {
+    title: "Contabilidad y Fiscal RD",
+    subtitle: "Contabilidad, igualas, nómina y cumplimiento DGII",
+    icon: ReceiptText,
+    offers: [
+      ["Iguala Contable Mensual", "Contabilidad completa, impuestos y reportes DGII", "Desde RD$ 8,000/mes", "Contrato anual según volumen y complejidad"],
+      ["Outsourcing Fiscal y Nómina", "Nómina TSS/ISR/INFOTEP, ITBIS, retenciones y e-CF", "Desde RD$ 6,000/mes", "Mensual según cantidad de empleados"],
+      ["Consultoría Fiscal Puntual", "Planeación fiscal, regularización y auditoría interna", "USD $80 – $150/hora", "Proyecto o por hora"],
+    ],
+  },
+];
+
+const faqs = [
+  ["¿Cuánto cuesta implementar Odoo en RD?", "La inversión depende de los módulos, usuarios, migración e integraciones. Los proyectos suelen iniciar desde USD $3,000 y se cotizan después del diagnóstico."],
+  ["¿Ofrecen igualas contables mensuales?", "Sí. Gestionamos contabilidad, impuestos y reportes DGII mediante igualas dimensionadas según el volumen y la complejidad de cada empresa."],
+  ["¿Trabajan con empresas fuera de Santo Domingo?", "Sí. Atendemos empresas en toda República Dominicana y el Caribe mediante una modalidad híbrida, con acompañamiento remoto y presencial cuando el proyecto lo requiere."],
+  ["¿Puedo empezar solo con tecnología o solo con contabilidad?", "Sí. Cada práctica puede contratarse de forma independiente. Cuando ambas participan, coordinamos una solución integral bajo una sola firma."],
+  ["¿Cómo es el proceso de diagnóstico?", "Iniciamos con una conversación de calificación, revisamos el contexto operativo y definimos alcance, prioridades, riesgos y la modalidad de colaboración recomendada."],
 ];
 
 function Home() {
