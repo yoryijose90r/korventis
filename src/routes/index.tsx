@@ -1,5 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BarChart3, Bot, BriefcaseBusiness, Building2, Check, ChevronDown, Database, FileCheck2, Handshake, Landmark, Network, ReceiptText, ShieldCheck, Target, TrendingUp, Users } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { ArrowRight, BarChart3, BriefcaseBusiness, Building2, Check, ChevronDown, Database, Handshake, Landmark, Network, ReceiptText, ShieldCheck, Target, TrendingUp } from "lucide-react";
 import { SiteShell } from "@/components/site/site-shell";
 import { CtaLink } from "@/components/site/cta-button";
 import { Reveal } from "@/components/site/reveal";
