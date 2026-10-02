@@ -22,7 +22,7 @@ export const leadSchema = z.object({
   details: z
     .record(z.string().max(60), z.union([z.string().max(200), z.array(z.string().max(60)).max(12)]))
     .optional(),
-  website: z.string().max(0).optional(), // honeypot
+  website: z.string().max(200).optional(), // honeypot
 });
 
 export type LeadInput = z.infer<typeof leadSchema>;
