@@ -13,6 +13,7 @@ import { Route as SolucionesRouteImport } from './routes/soluciones'
 import { Route as SobreNosotrosRouteImport } from './routes/sobre-nosotros'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServiciosRouteImport } from './routes/servicios'
+import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as PreciosRouteImport } from './routes/precios'
 import { Route as NuestraExperienciaRouteImport } from './routes/nuestra-experiencia'
 import { Route as ContactoRouteImport } from './routes/contacto'
@@ -36,6 +37,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ServiciosRoute = ServiciosRouteImport.update({
   id: '/servicios',
   path: '/servicios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadRoute = PrivacidadRouteImport.update({
+  id: '/privacidad',
+  path: '/privacidad',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PreciosRoute = PreciosRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/contacto': typeof ContactoRoute
   '/nuestra-experiencia': typeof NuestraExperienciaRoute
   '/precios': typeof PreciosRoute
+  '/privacidad': typeof PrivacidadRoute
   '/servicios': typeof ServiciosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/contacto': typeof ContactoRoute
   '/nuestra-experiencia': typeof NuestraExperienciaRoute
   '/precios': typeof PreciosRoute
+  '/privacidad': typeof PrivacidadRoute
   '/servicios': typeof ServiciosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/contacto': typeof ContactoRoute
   '/nuestra-experiencia': typeof NuestraExperienciaRoute
   '/precios': typeof PreciosRoute
+  '/privacidad': typeof PrivacidadRoute
   '/servicios': typeof ServiciosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/nuestra-experiencia'
     | '/precios'
+    | '/privacidad'
     | '/servicios'
     | '/sitemap.xml'
     | '/sobre-nosotros'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/nuestra-experiencia'
     | '/precios'
+    | '/privacidad'
     | '/servicios'
     | '/sitemap.xml'
     | '/sobre-nosotros'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/nuestra-experiencia'
     | '/precios'
+    | '/privacidad'
     | '/servicios'
     | '/sitemap.xml'
     | '/sobre-nosotros'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   ContactoRoute: typeof ContactoRoute
   NuestraExperienciaRoute: typeof NuestraExperienciaRoute
   PreciosRoute: typeof PreciosRoute
+  PrivacidadRoute: typeof PrivacidadRoute
   ServiciosRoute: typeof ServiciosRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreNosotrosRoute: typeof SobreNosotrosRoute
@@ -162,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/servicios'
       fullPath: '/servicios'
       preLoaderRoute: typeof ServiciosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidad': {
+      id: '/privacidad'
+      path: '/privacidad'
+      fullPath: '/privacidad'
+      preLoaderRoute: typeof PrivacidadRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/precios': {
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactoRoute: ContactoRoute,
   NuestraExperienciaRoute: NuestraExperienciaRoute,
   PreciosRoute: PreciosRoute,
+  PrivacidadRoute: PrivacidadRoute,
   ServiciosRoute: ServiciosRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreNosotrosRoute: SobreNosotrosRoute,
