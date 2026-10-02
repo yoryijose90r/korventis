@@ -6,12 +6,8 @@
 
 /*
  * KORVENTIS — Corporate design system
- * Brand palette:
- *   Navy       #10253F
- *   Corporate  #1F4E79
- *   Sky        #2F80ED
- *   Silver     #D9DDE3
- *   White / very light gray
+ * Palette: Marfil #F5F1E9, Carbón #242526, Berenjena #4A2942,
+ *   Cobre #B86A45 (accent only), Piedra #DDD5CA
  * Fonts: Poppins (headings), Open Sans (body)
  */
 
@@ -50,85 +46,81 @@
   --color-sky: var(--sky);
   --color-silver: var(--silver);
   --color-mist: var(--mist);
+  --color-copper: var(--copper);
 
   --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Poppins", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
-  --radius: 0.9rem;
+  --radius: 0.75rem;
 
-  --background: #ffffff;
-  --foreground: #10253f;
-
+  /* KORVENTIS — Marfil, Carbón, Berenjena, Cobre (acento), Piedra */
+  --background: #fbf9f5;
+  --foreground: #242526;
   --card: #ffffff;
-  --card-foreground: #10253f;
-
+  --card-foreground: #242526;
   --popover: #ffffff;
-  --popover-foreground: #10253f;
-
-  --primary: #1f4e79;
+  --popover-foreground: #242526;
+  --primary: #4a2942;
   --primary-foreground: #ffffff;
-
-  --secondary: #f3f6fb;
-  --secondary-foreground: #10253f;
-
-  --muted: #f5f7fa;
-  --muted-foreground: #5a6b82;
-
-  --accent: #2f80ed;
+  --secondary: #f5f1e9;
+  --secondary-foreground: #242526;
+  --muted: #f5f1e9;
+  --muted-foreground: #5e5a55;
+  --accent: #a3573a;
   --accent-foreground: #ffffff;
-
-  --destructive: #d64545;
+  --destructive: #b3261e;
   --destructive-foreground: #ffffff;
+  --border: #e3dbd0;
+  --input: #d6ccbf;
+  --ring: #a3573a;
 
-  --border: #e4e9f1;
-  --input: #e4e9f1;
-  --ring: #2f80ed;
+  /* Brand tokens (names kept for compatibility) */
+  --navy: #242526; /* Carbón */
+  --brand: #4a2942; /* Berenjena */
+  --sky: #a3573a; /* Cobre accesible sobre claro (AA) */
+  --silver: #ddd5ca; /* Piedra */
+  --mist: #f5f1e9; /* Marfil */
+  --copper: #b86a45;
 
-  /* Brand */
-  --navy: #10253f;
-  --brand: #1f4e79;
-  --sky: #2f80ed;
-  --silver: #d9dde3;
-  --mist: #f5f7fa;
+  --gradient-navy: linear-gradient(150deg, #1c1d1e 0%, #242526 55%, #3a2335 100%);
+  --gradient-brand: linear-gradient(135deg, #4a2942 0%, #5e3454 100%);
+  --gradient-sky: linear-gradient(120deg, #b86a45 0%, #c98a64 100%);
+  --gradient-hero-overlay: linear-gradient(120deg, rgba(28, 29, 30, 0.95) 0%, rgba(36, 37, 38, 0.85) 50%, rgba(74, 41, 66, 0.7) 100%);
 
-  /* Gradients */
-  --gradient-navy: linear-gradient(135deg, #0b1a2e 0%, #10253f 45%, #1f4e79 100%);
-  --gradient-brand: linear-gradient(135deg, #1f4e79 0%, #2f80ed 100%);
-  --gradient-sky: linear-gradient(120deg, #2f80ed 0%, #56a0ff 100%);
-  --gradient-hero-overlay: linear-gradient(
-    120deg,
-    rgba(11, 26, 46, 0.94) 0%,
-    rgba(16, 37, 63, 0.82) 45%,
-    rgba(31, 78, 121, 0.55) 100%
-  );
+  --shadow-sm: 0 1px 2px rgba(36, 37, 38, 0.06);
+  --shadow-card: 0 10px 30px -18px rgba(36, 37, 38, 0.25);
+  --shadow-elevated: 0 24px 60px -30px rgba(36, 37, 38, 0.4);
+  --shadow-glow: 0 14px 34px -18px rgba(74, 41, 66, 0.55);
+}
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(16, 37, 63, 0.06);
-  --shadow-card: 0 12px 40px -18px rgba(16, 37, 63, 0.28);
-  --shadow-elevated: 0 30px 70px -30px rgba(16, 37, 63, 0.45);
-  --shadow-glow: 0 20px 60px -20px rgba(47, 128, 237, 0.5);
+/* Dark surfaces: lighter copper for AA contrast on carbón */
+.bg-gradient-navy,
+.bg-navy,
+.on-dark {
+  --sky: #dca383;
+  --silver: #e6dfd5;
 }
 
 .dark {
-  --background: #0b1a2e;
-  --foreground: #eef3fa;
-  --card: #10253f;
-  --card-foreground: #eef3fa;
-  --popover: #10253f;
-  --popover-foreground: #eef3fa;
-  --primary: #2f80ed;
-  --primary-foreground: #ffffff;
-  --secondary: #16304f;
-  --secondary-foreground: #eef3fa;
-  --muted: #16304f;
-  --muted-foreground: #9fb2ca;
-  --accent: #2f80ed;
-  --accent-foreground: #ffffff;
-  --border: rgba(255, 255, 255, 0.1);
-  --input: rgba(255, 255, 255, 0.14);
-  --ring: #2f80ed;
+  --background: #1c1d1e;
+  --foreground: #f5f1e9;
+  --card: #242526;
+  --card-foreground: #f5f1e9;
+  --popover: #242526;
+  --popover-foreground: #f5f1e9;
+  --primary: #dca383;
+  --primary-foreground: #1c1d1e;
+  --secondary: #2e2a2d;
+  --secondary-foreground: #f5f1e9;
+  --muted: #2e2a2d;
+  --muted-foreground: #c9c0b4;
+  --accent: #dca383;
+  --accent-foreground: #1c1d1e;
+  --border: rgba(245, 241, 233, 0.12);
+  --input: rgba(245, 241, 233, 0.16);
+  --ring: #dca383;
 }
 
 @layer base {
@@ -195,14 +187,26 @@
 }
 
 /* Scroll reveal */
-@utility reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+/* Content stays visible without JS; hidden state only when JS is active and motion allowed */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .reveal:not(.reveal-visible) {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  .reveal {
+    transition:
+      opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @keyframes flow-dot {
+    0% { transform: translateX(0); opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { transform: translateX(var(--flow-distance, 100%)); opacity: 0; }
+  }
+  .flow-dot { animation: flow-dot 3.2s ease-in-out infinite; }
 }
-@utility reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }

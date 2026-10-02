@@ -1,0 +1,87 @@
+import { useRef, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { AlertTriangle, CheckCircle2, Mail, MessageCircle } from "lucide-react";
+import { submitLead } from "@/lib/leads.functions";
+import type { LeadInput } from "@/lib/leads.schema";
+import { CONTACT } from "@/lib/offer";
+
+export type SubmitState = "idle" | "sending" | "sent" | "not_configured" | "error";
+
+/** Shared submission mechanism for every lead form. Guards against duplicate sends. */
+export function useLeadSubmit() {
+  const send = useServerFn(submitLead);
+  const [state, setState] = useState<SubmitState>("idle");
+  const inFlight = useRef(false);
+
+  const submit = async (payload: LeadInput) => {
+    if (inFlight.current || state === "sent") return;
+    inFlight.current = true;
+    setState("sending");
+    try {
+      const res = await send({ data: payload });
+      if (res.ok) setState("sent");
+      else setState(res.reason === "not_configured" ? "not_configured" : "error");
+    } catch {
+      setState("error");
+    } finally {
+      inFlight.current = false;
+    }
+  };
+
+  return { state, submit, reset: () => setState("idle") };
+}
+
+export function LeadSuccess() {
+  return (
+    <div role="status" className="flex min-h-80 flex-col items-center justify-center rounded-2xl border border-border bg-white p-8 text-center shadow-card">
+      <CheckCircle2 className="h-14 w-14 text-sky" aria-hidden="true" />
+      <h3 className="mt-5 font-heading text-2xl font-bold text-navy">Solicitud recibida</h3>
+      <p className="mt-3 max-w-md text-muted-foreground">{CONTACT.responseCommitment}</p>
+    </div>
+  );
+}
+
+function fallbackText(summary: string) {
+  return `Hola Korventis, quisiera agendar una conversación inicial.\n\n${summary}`;
+}
+
+/** Visible alternative channels. Opening another app is not the same as receiving the request. */
+export function ContactFallback({ summary, tone = "light" }: { summary?: string; tone?: "light" | "dark" }) {
+  const body = fallbackText(summary ?? "");
+  const mail = `mailto:${CONTACT.email}?subject=${encodeURIComponent("Conversación inicial — sitio web")}&body=${encodeURIComponent(body)}`;
+  const wa = `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(body)}`;
+  const btn =
+    tone === "dark"
+      ? "border-white/25 text-white hover:bg-white/10"
+      : "border-border bg-white text-navy hover:border-sky hover:text-sky";
+  return (
+    <div className="flex flex-wrap gap-3">
+      <a href={mail} className={`inline-flex h-11 items-center gap-2 rounded-full border px-5 text-sm font-semibold transition-colors ${btn}`}>
+        <Mail className="h-4 w-4" aria-hidden="true" /> Abrir correo
+      </a>
+      <a href={wa} target="_blank" rel="noopener noreferrer" className={`inline-flex h-11 items-center gap-2 rounded-full border px-5 text-sm font-semibold transition-colors ${btn}`}>
+        <MessageCircle className="h-4 w-4" aria-hidden="true" /> Continuar en WhatsApp
+      </a>
+    </div>
+  );
+}
+
+export function LeadError({ state, summary }: { state: SubmitState; summary: string }) {
+  if (state !== "not_configured" && state !== "error") return null;
+  return (
+    <div role="alert" className="mt-6 rounded-2xl border border-destructive/30 bg-destructive/5 p-5">
+      <p className="flex items-start gap-2 text-sm font-semibold text-navy">
+        <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-destructive" aria-hidden="true" />
+        {state === "not_configured"
+          ? "El envío en línea aún no está habilitado, por lo que tu solicitud no se ha enviado."
+          : "No pudimos enviar tu solicitud. Tus datos siguen en el formulario; inténtalo de nuevo."}
+      </p>
+      <p className="mt-2 text-sm text-muted-foreground">
+        También puedes escribirnos directamente. Se abrirá tu aplicación con el mensaje preparado para que lo revises y lo envíes tú.
+      </p>
+      <div className="mt-4">
+        <ContactFallback summary={summary} />
+      </div>
+    </div>
+  );
+}
