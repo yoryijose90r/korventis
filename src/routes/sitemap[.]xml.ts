@@ -1,8 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-// TODO: replace with your project URL once a project name or custom domain is set.
-const BASE_URL = "";
+const BASE_URL = "https://korventis.lovable.app";
 
 interface SitemapEntry {
   path: string;
@@ -21,6 +20,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/nuestra-experiencia", changefreq: "monthly", priority: "0.7" },
           { path: "/precios", changefreq: "monthly", priority: "0.8" },
           { path: "/contacto", changefreq: "yearly", priority: "0.6" },
+          { path: "/privacidad", changefreq: "yearly", priority: "0.3" },
         ];
 
         const urls = entries.map((e) =>

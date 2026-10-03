@@ -85,19 +85,19 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden bg-gradient-navy pt-32 pb-20 text-white sm:pt-40 sm:pb-24">
+    <section className="relative overflow-hidden bg-gradient-navy pt-28 pb-14 text-white sm:pt-32 sm:pb-16">
       <div
         className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full opacity-30 blur-3xl"
-        style={{ background: "radial-gradient(circle, #2f80ed, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #4a2942, transparent 70%)" }}
       />
       <div
         className="pointer-events-none absolute -bottom-32 -left-20 h-96 w-96 rounded-full opacity-20 blur-3xl"
-        style={{ background: "radial-gradient(circle, #56a0ff, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #b86a45, transparent 70%)" }}
       />
       <div className="relative mx-auto max-w-4xl px-5 text-center lg:px-8">
         <Reveal>
           <Eyebrow variant="light">{eyebrow}</Eyebrow>
-          <h1 className="mt-6 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mt-6 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
             {title}
           </h1>
           {subtitle && (

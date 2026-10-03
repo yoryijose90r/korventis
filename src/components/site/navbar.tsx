@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { to: "/", label: "Inicio" },
   { to: "/sobre-nosotros", label: "Nosotros" },
   { to: "/soluciones", label: "Soluciones" },
-  { to: "/nuestra-experiencia", label: "Nuestra Experiencia" },
+  { to: "/nuestra-experiencia", label: "Experiencia" },
   { to: "/precios", label: "Planes" },
   { to: "/contacto", label: "Contacto" },
 ] as const;
@@ -70,7 +70,7 @@ export function Navbar() {
 
         <div className="hidden items-center gap-3 xl:flex">
           <CtaLink to="/contacto" variant={scrolled ? "primary" : "white"} size="md">
-            Solicitar Diagnóstico
+            Agendar conversación inicial
           </CtaLink>
         </div>
 
@@ -141,7 +141,7 @@ export function Navbar() {
               className="w-full"
               onClick={() => setOpen(false)}
             >
-              Solicitar Diagnóstico
+              Agendar conversación inicial
             </CtaLink>
           </div>
         </div>
