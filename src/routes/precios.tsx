@@ -1,188 +1,72 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, Star, ArrowRight } from "lucide-react";
+import { Check, Info } from "lucide-react";
 import { SiteShell } from "@/components/site/site-shell";
-import { PageHero, SectionHeading, Container } from "@/components/site/primitives";
-import { Reveal } from "@/components/site/reveal";
+import { PageHero, Container, SectionHeading } from "@/components/site/primitives";
 import { CtaLink } from "@/components/site/cta-button";
-import { cn } from "@/lib/utils";
+import { ErpPlansGrid, ConversationVsDiagnosis } from "@/components/site/offer-blocks";
+import { ERP_RULES, PAYROLL, ECF } from "@/lib/offer";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/precios")({
-  head: () => ({
-    meta: [
-      { title: "Planes | Consultoría de Transformación Empresarial — Korventis" },
-      {
-        name: "description",
-        content:
-          "Cuatro planes de consultoría diseñados para acompañar cada etapa de tu empresa: diagnóstico, impulso, crecimiento y transformación empresarial. Cada propuesta se adapta a tus objetivos.",
-      },
-      { property: "og:title", content: "Planes | Korventis" },
-      { property: "og:url", content: "/precios" },
-    ],
-    links: [{ rel: "canonical", href: "/precios" }],
-  }),
+  head: () =>
+    seo("/precios", "Planes y precios | Korventis ERP", "Planes de lanzamiento de Korventis ERP en RD$, nómina opcional, facturación electrónica y consultoría especializada."),
   component: Precios,
 });
 
-const plans = [
-  {
-    name: "Diagnóstico Empresarial",
-    from: "Desde USD 450",
-    tagline: "El primer paso para entender dónde mejorar.",
-    features: [
-      "Evaluación de tu operación actual",
-      "Identificación de oportunidades de mejora",
-      "Informe con recomendaciones priorizadas",
-      "Sesión de resultados con la gerencia",
-    ],
-    highlight: false,
-  },
-  {
-    name: "Impulso Empresarial",
-    from: "Desde USD 1,500",
-    tagline: "Orden y eficiencia para operar mejor.",
-    features: [
-      "Optimización de procesos clave",
-      "Organización de la información empresarial",
-      "Primeros indicadores de gestión",
-      "Acompañamiento durante la implementación",
-    ],
-    highlight: true,
-  },
-  {
-    name: "Crecimiento Empresarial",
-    from: "Desde USD 4,500",
-    tagline: "Estructura y datos para escalar con control.",
-    features: [
-      "Mejora integral de procesos administrativos",
-      "Dashboards e indicadores gerenciales",
-      "Digitalización de procesos financieros",
-      "Capacitación funcional del equipo",
-    ],
-    highlight: false,
-  },
-  {
-    name: "Transformación Empresarial",
-    from: "Cotización personalizada",
-    tagline: "Un plan a la medida para reinventar tu operación.",
-    features: [
-      "Estrategia integral de transformación",
-      "Inteligencia de negocios avanzada",
-      "Continuidad y escalabilidad operativa",
-      "Acompañamiento estratégico continuo",
-    ],
-    highlight: false,
-  },
-];
+function List({ items }: { items: string[] }) {
+  return (
+    <ul className="space-y-2 text-sm text-navy/85">
+      {items.map((t) => <li key={t} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-sky" aria-hidden="true" />{t}</li>)}
+    </ul>
+  );
+}
 
 function Precios() {
   return (
     <SiteShell>
-      <PageHero
-        eyebrow="Planes"
-        title={
-          <>
-            Un plan para cada etapa de tu{" "}
-            <span className="text-gradient-brand">empresa</span>
-          </>
-        }
-        subtitle="Nuestros planes describen resultados, no horas de trabajo. Cada propuesta se adapta a los objetivos y la realidad de tu empresa."
-      />
+      <PageHero eyebrow="Planes" title="Precios claros, alcance definido" subtitle="Precios de lanzamiento propuestos, sujetos a confirmación de alcance. Todos los importes en RD$, antes de impuestos aplicables." />
 
-      {/* Commercial message */}
-      <section className="bg-gradient-navy py-20 text-white">
+      <section className="bg-background py-20">
         <Container>
-          <div className="mx-auto max-w-3xl text-center">
-            <Reveal>
-              <h2 className="font-heading text-3xl font-bold leading-tight sm:text-4xl">
-                Cada empresa tiene necesidades diferentes.
-              </h2>
-              <p className="mt-5 text-lg leading-relaxed text-silver/85">
-                En Korventis no existen soluciones universales. Analizamos los procesos, la
-                información y los objetivos de cada empresa para diseñar una propuesta personalizada
-                que genere el mayor valor posible.
-              </p>
-              <div className="mt-8">
-                <CtaLink to="/contacto" variant="white" size="lg">
-                  Agenda una consulta estratégica <ArrowRight className="h-4 w-4" />
-                </CtaLink>
-              </div>
-            </Reveal>
+          <SectionHeading eyebrow="Korventis ERP" title="Planes mensuales" subtitle="El alojamiento está incluido. La implementación es un pago inicial separado." />
+          <div className="mt-12"><ErpPlansGrid /></div>
+          <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-border bg-white p-7">
+            <h3 className="flex items-center gap-2 font-heading text-lg font-semibold text-navy"><Info className="h-5 w-5 text-sky" aria-hidden="true" />Condiciones</h3>
+            <div className="mt-4"><List items={ERP_RULES} /></div>
           </div>
         </Container>
       </section>
 
-      {/* PLANS */}
-      <section className="bg-white py-24">
-        <Container>
-          <SectionHeading
-            eyebrow="Nuestros Planes"
-            title="Resultados claros en cada nivel"
-            subtitle="Comienza donde estés hoy y avanza a tu ritmo hacia una empresa más eficiente y organizada."
-          />
-          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {plans.map((p, i) => (
-              <Reveal as="article" key={p.name} delay={(i % 4) * 80}>
-                <div
-                  className={cn(
-                    "relative flex h-full flex-col rounded-3xl border p-8 transition-all duration-300",
-                    p.highlight
-                      ? "border-transparent bg-gradient-navy text-white shadow-elevated lg:-translate-y-3"
-                      : "border-border bg-white text-navy shadow-card hover:-translate-y-1.5 hover:shadow-elevated",
-                  )}
-                >
-                  {p.highlight && (
-                    <span className="absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-gradient-brand px-4 py-1.5 text-xs font-semibold text-white shadow-glow">
-                      <Star className="h-3.5 w-3.5 fill-white" /> Recomendado
-                    </span>
-                  )}
-                  <h3 className="font-heading text-lg font-bold">{p.name}</h3>
-                  <p
-                    className={cn(
-                      "mt-1.5 text-sm",
-                      p.highlight ? "text-silver/80" : "text-muted-foreground",
-                    )}
-                  >
-                    {p.tagline}
-                  </p>
-                  <div className="mt-6">
-                    <span className="font-heading text-2xl font-extrabold">{p.from}</span>
-                  </div>
-                  <ul className="mt-7 flex-1 space-y-3.5">
-                    {p.features.map((f) => (
-                      <li key={f} className="flex items-start gap-3 text-sm">
-                        <Check className="mt-0.5 h-4.5 w-4.5 shrink-0 text-sky" />
-                        <span className={p.highlight ? "text-silver/90" : "text-navy/80"}>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <CtaLink
-                    to="/contacto"
-                    variant={p.highlight ? "white" : "primary"}
-                    size="lg"
-                    className="mt-8 w-full"
-                  >
-                    {p.from === "Cotización personalizada" ? "Solicitar propuesta" : "Comenzar"}
-                  </CtaLink>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+      <section className="bg-mist py-20">
+        <Container className="grid gap-8 lg:grid-cols-2">
+          <article className="rounded-2xl border border-border bg-white p-8">
+            <p className="text-xs font-semibold uppercase tracking-wide text-sky">Adicional opcional de software</p>
+            <h2 className="mt-2 font-heading text-2xl font-bold text-navy">Nómina</h2>
+            <p className="mt-4 font-heading text-xl font-semibold text-brand">{PAYROLL.base}</p>
+            <p className="mt-1 text-sm text-muted-foreground">{PAYROLL.baseDetail}</p>
+            <ul className="mt-4 space-y-1 text-sm text-navy/85"><li>{PAYROLL.tier}</li><li>{PAYROLL.above}</li><li>{PAYROLL.setup}</li></ul>
+            <table className="mt-5 w-full text-sm">
+              <caption className="mb-2 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">Ejemplos</caption>
+              <tbody>
+                {PAYROLL.examples.map(([e, p]) => <tr key={e} className="border-t border-border"><td className="py-2 text-navy">{e}</td><td className="py-2 text-right font-semibold text-navy">{p}</td></tr>)}
+              </tbody>
+            </table>
+            <div className="mt-5"><List items={PAYROLL.notes} /></div>
+          </article>
+          <article className="rounded-2xl border border-border bg-white p-8">
+            <p className="text-xs font-semibold uppercase tracking-wide text-sky">Integración con proveedor externo</p>
+            <h2 className="mt-2 font-heading text-2xl font-bold text-navy">Facturación electrónica (e-CF)</h2>
+            <p className="mt-4 text-sm leading-relaxed text-navy/85">{ECF.summary}</p>
+            <div className="mt-5"><List items={ECF.notes} /></div>
+          </article>
+        </Container>
+      </section>
 
-          <p className="mx-auto mt-14 max-w-3xl text-center text-sm text-muted-foreground">
-            Los valores mostrados son precios de referencia actualizados y corresponden al punto de
-            partida de cada plan. La inversión final depende del tamaño de la empresa, el volumen de
-            operaciones, el alcance del proyecto y el nivel de acompañamiento requerido, y puede
-            variar según las condiciones del mercado al momento de la propuesta.
-          </p>
-          <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-muted-foreground">
-            ¿No sabes por dónde empezar? Conversemos sobre tu empresa y te recomendaremos el camino
-            ideal para organizarla y hacerla crecer.
-          </p>
-          <div className="mt-6 text-center">
-            <CtaLink to="/contacto" variant="navy" size="lg">
-              Conversemos sobre tu empresa <ArrowRight className="h-4 w-4" />
-            </CtaLink>
-          </div>
+      <section className="bg-background py-20">
+        <Container>
+          <SectionHeading eyebrow="Consultoría especializada" title="Diagnóstico, proyectos y servicios a medida" subtitle="Se cotizan por separado de las mensualidades ERP: datos, BI, integraciones, infraestructura y servicios contables." />
+          <div className="mx-auto mt-10 max-w-4xl"><ConversationVsDiagnosis /></div>
+          <div className="mt-10 text-center"><CtaLink to="/contacto" size="lg">Solicitar propuesta</CtaLink></div>
         </Container>
       </section>
     </SiteShell>
