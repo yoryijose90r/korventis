@@ -1,96 +1,53 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, Phone, MapPin, Clock, MessageSquare } from "lucide-react";
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { SiteShell } from "@/components/site/site-shell";
 import { PageHero, Container, SectionHeading } from "@/components/site/primitives";
-import { Reveal } from "@/components/site/reveal";
 import { ContactForm } from "@/components/site/contact-form";
+import { ContactFallback } from "@/components/site/lead-submit";
+import { ConversationVsDiagnosis } from "@/components/site/offer-blocks";
+import { CONTACT } from "@/lib/offer";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contacto")({
-  head: () => ({
-    meta: [
-      { title: "Contacto | Solicita tu Diagnóstico — Korventis" },
-      {
-        name: "description",
-        content:
-          "Contacta a Korventis y solicita tu diagnóstico empresarial. Tecnología, datos y consultoría para transformar tu operación.",
-      },
-      { property: "og:title", content: "Contacto | Korventis" },
-      { property: "og:url", content: "/contacto" },
-    ],
-    links: [{ rel: "canonical", href: "/contacto" }],
-  }),
+  head: () => seo("/contacto", "Contacto | Agenda una conversación inicial — Korventis", "Agenda una conversación inicial sin costo con Korventis para definir el servicio adecuado para tu empresa."),
   component: Contacto,
 });
 
 const info = [
-  { icon: Mail, t: "Correo", v: "contacto@korventis.net", d: "Respondemos en menos de 24h" },
-  { icon: Phone, t: "Teléfono", v: "+1 (829) 686-2720", d: "Lun a Vie, 9am - 5pm" },
-  { icon: MapPin, t: "Ubicación", v: "Santo Domingo", d: "Caribe & Latinoamérica" },
-  { icon: Clock, t: "Horario", v: "9:00 - 17:00", d: "Lunes a viernes" },
+  { icon: Mail, t: "Correo", v: CONTACT.email, href: `mailto:${CONTACT.email}` },
+  { icon: Phone, t: "Teléfono / WhatsApp", v: CONTACT.phoneDisplay, href: `tel:${CONTACT.phoneTel}` },
+  { icon: MapPin, t: "Dirección", v: CONTACT.address },
+  { icon: Clock, t: "Horario", v: CONTACT.hours },
 ];
 
 function Contacto() {
   return (
     <SiteShell>
-      <PageHero
-        eyebrow="Contacto"
-        title={
-          <>
-            Hablemos de tu <span className="text-gradient-brand">transformación</span>
-          </>
-        }
-        subtitle="Cuéntanos sobre tu empresa y descubre cómo tecnología, datos y estrategia pueden fortalecer el núcleo de tu operación."
-      />
-
-      <section className="bg-white py-24">
-        <Container>
-          <div className="grid gap-14 lg:grid-cols-[1fr_1.15fr]">
-            <div>
-              <SectionHeading
-                align="left"
-                eyebrow="Estamos para ayudarte"
-                title="Conversemos sobre tu próximo paso"
-                subtitle="Elige el canal que prefieras. Un consultor de Korventis te acompañará desde el primer contacto."
-                className="max-w-md"
-              />
-              <div className="mt-10 grid gap-5 sm:grid-cols-2">
-                {info.map((item, i) => (
-                  <Reveal key={item.t} delay={i * 70}>
-                    <div className="h-full rounded-2xl border border-border bg-mist p-6">
-                      <span className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-brand text-white shadow-glow">
-                        <item.icon className="h-5 w-5" />
-                      </span>
-                      <div className="mt-4 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                        {item.t}
-                      </div>
-                      <div className="mt-1 font-heading font-semibold text-navy">{item.v}</div>
-                      <div className="mt-1 text-xs text-muted-foreground">{item.d}</div>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-
-              <Reveal className="mt-6" delay={200}>
-                <div className="flex items-start gap-4 rounded-2xl bg-gradient-navy p-6 text-white">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/10 text-sky">
-                    <MessageSquare className="h-5 w-5" />
-                  </span>
+      <PageHero eyebrow="Contacto" title="Agenda una conversación inicial" subtitle="Sin costo. Conocemos tus necesidades y te indicamos el servicio adecuado." />
+      <section className="bg-background py-20">
+        <Container className="grid gap-12 lg:grid-cols-[1fr_1.15fr]">
+          <div>
+            <SectionHeading align="left" eyebrow="Canales" title="Hablemos" subtitle={CONTACT.responseCommitment} />
+            <dl className="mt-8 space-y-5">
+              {info.map((i) => (
+                <div key={i.t} className="flex gap-4">
+                  <i.icon className="mt-1 h-5 w-5 shrink-0 text-sky" aria-hidden="true" />
                   <div>
-                    <div className="font-heading font-semibold">Diagnóstico empresarial</div>
-                    <p className="mt-1 text-sm text-silver/80">
-                      En la sesión inicial compartimos una muestra de los hallazgos (aprox. 20% de
-                      las oportunidades detectadas) para que veas el valor real. El informe completo,
-                      con el plan de mejora detallado, forma parte del servicio de diagnóstico.
-                    </p>
+                    <dt className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{i.t}</dt>
+                    <dd className="mt-1 font-medium text-navy">{i.href ? <a href={i.href} className="hover:text-sky">{i.v}</a> : i.v}</dd>
                   </div>
                 </div>
-              </Reveal>
-            </div>
-
-            <Reveal delay={120}>
-              <ContactForm />
-            </Reveal>
+              ))}
+            </dl>
+            <div className="mt-8"><ContactFallback /></div>
           </div>
+          <ContactForm />
+        </Container>
+      </section>
+      <section className="bg-mist py-20">
+        <Container>
+          <SectionHeading eyebrow="Primer paso" title="¿Qué incluye cada etapa?" />
+          <div className="mx-auto mt-10 max-w-4xl"><ConversationVsDiagnosis /></div>
         </Container>
       </section>
     </SiteShell>

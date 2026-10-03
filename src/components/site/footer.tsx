@@ -1,32 +1,26 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone, Linkedin, Twitter, Facebook } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "./logo";
+import { CONTACT } from "@/lib/offer";
 
 const columns = [
   {
-    title: "Compañía",
-    links: [
-      { to: "/sobre-nosotros", label: "Sobre Nosotros" },
-      { to: "/nuestra-experiencia", label: "Nuestra Experiencia" },
-      { to: "/soluciones", label: "Soluciones" },
-      { to: "/contacto", label: "Contacto" },
-    ],
-  },
-  {
     title: "Soluciones",
     links: [
-      { to: "/soluciones", label: "Transformación Empresarial" },
-      { to: "/soluciones", label: "Gestión Administrativa y Contable" },
-      { to: "/soluciones", label: "Inteligencia de Negocios" },
-      { to: "/soluciones", label: "Consultoría Estratégica" },
+      { to: "/soluciones", label: "Korventis ERP" },
+      { to: "/soluciones", label: "Datos y automatización" },
+      { to: "/soluciones", label: "Contabilidad y gestión" },
+      { to: "/soluciones", label: "Infraestructura y continuidad" },
     ],
   },
   {
-    title: "Recursos",
+    title: "Compañía",
     links: [
+      { to: "/sobre-nosotros", label: "Nosotros" },
+      { to: "/nuestra-experiencia", label: "Experiencia" },
       { to: "/precios", label: "Planes" },
-      { to: "/nuestra-experiencia", label: "Nuestra Experiencia" },
-      { to: "/contacto", label: "Contacto" },
+      { to: "/contacto", label: "Agendar conversación inicial" },
+      { to: "/privacidad", label: "Política de privacidad" },
     ],
   },
 ] as const;
@@ -34,42 +28,21 @@ const columns = [
 export function Footer() {
   return (
     <footer className="bg-gradient-navy text-white">
-      <div className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div className="mx-auto max-w-7xl px-5 py-14 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div className="max-w-sm">
             <Logo variant="light" />
-            <p className="mt-5 text-sm leading-relaxed text-silver/80">
-              Consultoría de transformación empresarial y digital. Ayudamos a pequeñas y medianas
-              empresas a ser más eficientes, organizadas y preparadas para crecer.
+            <p className="mt-5 text-sm leading-relaxed text-silver/85">
+              Firma dominicana que integra tecnología, datos y gestión contable para empresas y pymes.
             </p>
-            <div className="mt-6 flex gap-3">
-              {[Linkedin, Twitter, Facebook].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  aria-label="Red social"
-                  className="grid h-10 w-10 place-items-center rounded-xl border border-white/15 bg-white/5 text-silver transition-colors hover:border-sky hover:bg-sky/20 hover:text-white"
-                >
-                  <Icon className="h-4.5 w-4.5" />
-                </a>
-              ))}
-            </div>
           </div>
-
           {columns.map((col) => (
             <div key={col.title}>
-              <h3 className="font-heading text-sm font-semibold uppercase tracking-wider text-white">
-                {col.title}
-              </h3>
+              <h3 className="font-heading text-sm font-semibold uppercase tracking-wider text-white">{col.title}</h3>
               <ul className="mt-5 space-y-3">
                 {col.links.map((link, i) => (
                   <li key={`${link.label}-${i}`}>
-                    <Link
-                      to={link.to}
-                      className="text-sm text-silver/75 transition-colors hover:text-sky"
-                    >
-                      {link.label}
-                    </Link>
+                    <Link to={link.to} className="text-sm text-silver/85 transition-colors hover:text-sky">{link.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -77,36 +50,18 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 grid gap-4 border-t border-white/10 pt-8 text-sm text-silver/70 sm:grid-cols-3">
+        <div className="mt-12 grid gap-4 border-t border-white/10 pt-8 text-sm text-silver/85 sm:grid-cols-3">
           <span className="flex flex-col gap-1">
-            <a
-              href="mailto:contacto@korventis.net"
-              className="flex items-center gap-2 transition-colors hover:text-sky"
-            >
-              <Mail className="h-4 w-4 shrink-0 text-sky" /> contacto@korventis.net
-            </a>
-            <a
-              href="mailto:info@korventis.net"
-              className="flex items-center gap-2 transition-colors hover:text-sky"
-            >
-              <Mail className="h-4 w-4 shrink-0 text-sky" /> info@korventis.net
-            </a>
+            <a href={`mailto:${CONTACT.email}`} className="flex items-center gap-2 hover:text-sky"><Mail className="h-4 w-4 shrink-0 text-sky" aria-hidden="true" /> {CONTACT.email}</a>
+            <a href={`mailto:${CONTACT.emailSecondary}`} className="flex items-center gap-2 hover:text-sky"><Mail className="h-4 w-4 shrink-0 text-sky" aria-hidden="true" /> {CONTACT.emailSecondary}</a>
           </span>
-          <a
-            href="tel:+18296862720"
-            className="flex items-center gap-2 transition-colors hover:text-sky"
-          >
-            <Phone className="h-4 w-4 shrink-0 text-sky" /> +1 (829) 686-2720
-          </a>
-          <span className="flex items-start gap-2">
-            <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sky" /> Carmen Renata 3, Pantoja, Santo
-            Domingo 10701, RD
-          </span>
+          <a href={`tel:${CONTACT.phoneTel}`} className="flex items-center gap-2 hover:text-sky"><Phone className="h-4 w-4 shrink-0 text-sky" aria-hidden="true" /> {CONTACT.phoneDisplay}</a>
+          <span className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sky" aria-hidden="true" /> {CONTACT.address}</span>
         </div>
 
-        <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-silver/60 sm:flex-row">
+        <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-silver/75 sm:flex-row">
           <span>© {new Date().getFullYear()} Korventis. Todos los derechos reservados.</span>
-          <span>Technology, Data &amp; Business Consulting</span>
+          <Link to="/privacidad" className="hover:text-sky">Privacidad</Link>
         </div>
       </div>
     </footer>

@@ -8,6 +8,7 @@ interface RevealProps {
   as?: "div" | "section" | "li" | "article";
 }
 
+/** Short fade-in. Content stays visible without JS, without IntersectionObserver, or with reduced motion. */
 export function Reveal({ children, className, delay = 0, as = "div" }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -15,6 +16,10 @@ export function Reveal({ children, className, delay = 0, as = "div" }: RevealPro
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -22,18 +27,17 @@ export function Reveal({ children, className, delay = 0, as = "div" }: RevealPro
           observer.disconnect();
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+      { threshold: 0.1 },
     );
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
   const Tag = as as "div";
-
   return (
     <Tag
       ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ transitionDelay: `${Math.min(delay, 200)}ms` }}
       className={cn("reveal", visible && "reveal-visible", className)}
     >
       {children}

@@ -16,23 +16,11 @@ import { SiteShell } from "@/components/site/site-shell";
 import { PageHero, SectionHeading, Container } from "@/components/site/primitives";
 import { Reveal } from "@/components/site/reveal";
 import { CtaLink } from "@/components/site/cta-button";
-import foundersImg from "@/assets/founders.jpg";
-import meetingImg from "@/assets/meeting.jpg";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/sobre-nosotros")({
-  head: () => ({
-    meta: [
-      { title: "Sobre Nosotros | Korventis Consulting" },
-      {
-        name: "description",
-        content:
-          "Conoce a Korventis: misión, visión, valores e historia de una firma que integra tecnología, datos y estrategia empresarial en el Caribe y Latinoamérica.",
-      },
-      { property: "og:title", content: "Sobre Nosotros | Korventis" },
-      { property: "og:url", content: "/sobre-nosotros" },
-    ],
-    links: [{ rel: "canonical", href: "/sobre-nosotros" }],
-  }),
+  head: () =>
+    seo("/sobre-nosotros", "Nosotros | Korventis", "Conoce a los socios de Korventis y cómo integramos tecnología, datos y gestión contable para empresas dominicanas."),
   component: SobreNosotros,
 });
 
@@ -61,7 +49,7 @@ const objetivos = [
 const founders = [
   {
     name: "José Reyes",
-    role: "Tecnología, Datos & Transformación Digital",
+    role: "Socio Director · Tecnología, Datos y Automatización",
     skills: [
       "Infraestructura",
       "Oracle",
@@ -71,14 +59,13 @@ const founders = [
       "Metabase",
       "Oracle Analytics",
       "Business Intelligence",
-      "Cloud",
-      "Virtualización",
+            "Virtualización",
       "Automatización",
     ],
   },
   {
     name: "Yomarly De la Rosa",
-    role: "Contadora Pública & Consultoría Empresarial",
+    role: "Socia Directora · Contabilidad, Fiscal y Procesos Empresariales",
     skills: [
       "Consultoría Contable",
       "Procesos Administrativos",
@@ -106,16 +93,11 @@ function SobreNosotros() {
         <Container>
           <div className="grid items-center gap-14 lg:grid-cols-2">
             <Reveal>
-              <div className="relative">
-                <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-brand opacity-15 blur-2xl" />
-                <img
-                  src={meetingImg}
-                  alt="Equipo de Korventis colaborando"
-                  width={1408}
-                  height={1008}
-                  loading="lazy"
-                  className="rounded-[1.75rem] shadow-elevated"
-                />
+              <div className="rounded-2xl bg-gradient-navy p-10 text-white">
+                <p className="font-heading text-2xl font-semibold leading-snug">
+                  “Korventis une el <span className="text-sky">núcleo</span> de la operación con el impulso para crecer.”
+                </p>
+                <p className="mt-6 text-sm text-silver/85">Tecnología, datos y gestión contable en una sola firma.</p>
               </div>
             </Reveal>
             <div>
@@ -207,33 +189,11 @@ function SobreNosotros() {
         <Container>
           <SectionHeading
             eyebrow="Liderazgo"
-            title="Un matrimonio de profesionales"
+            title="Dos socios, la misma jerarquía"
             subtitle="Tecnología y contabilidad, unidas para transformar tu empresa desde el núcleo."
           />
-          <div className="mt-14 grid gap-8 lg:grid-cols-2">
-            <Reveal>
-              <div className="overflow-hidden rounded-3xl border border-border bg-white shadow-card">
-                <img
-                  src={foundersImg}
-                  alt="José Reyes y Yomarly De la Rosa, fundadores de Korventis"
-                  width={1200}
-                  height={1408}
-                  loading="lazy"
-                  className="h-80 w-full object-cover object-top"
-                />
-                <div className="p-8">
-                  <h3 className="font-heading text-xl font-bold text-navy">
-                    José Reyes &amp; Yomarly De la Rosa
-                  </h3>
-                  <p className="mt-1 text-sm text-sky">Fundadores de Korventis</p>
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                    La combinación única de experiencia tecnológica y financiera que da vida a la
-                    visión integral de Korventis.
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-            <div className="grid gap-6">
+          <div className="mt-14">
+            <div className="grid gap-6 lg:grid-cols-2">
               {founders.map((f, i) => (
                 <Reveal as="article" key={f.name} delay={i * 100}>
                   <div className="h-full rounded-3xl border border-border bg-white p-8 shadow-card">

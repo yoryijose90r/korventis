@@ -13,22 +13,12 @@ import {
 import { SiteShell } from "@/components/site/site-shell";
 import { PageHero, SectionHeading, Container } from "@/components/site/primitives";
 import { Reveal } from "@/components/site/reveal";
+import { seo } from "@/lib/seo";
 import { CtaLink } from "@/components/site/cta-button";
 
 export const Route = createFileRoute("/nuestra-experiencia")({
-  head: () => ({
-    meta: [
-      { title: "Nuestra Experiencia | Korventis Consulting" },
-      {
-        name: "description",
-        content:
-          "La experiencia profesional acumulada de Korventis en transformación empresarial y digital, inteligencia de negocios, procesos administrativos y consultoría estratégica.",
-      },
-      { property: "og:title", content: "Nuestra Experiencia | Korventis" },
-      { property: "og:url", content: "/nuestra-experiencia" },
-    ],
-    links: [{ rel: "canonical", href: "/nuestra-experiencia" }],
-  }),
+  head: () =>
+    seo("/nuestra-experiencia", "Experiencia | Korventis", "Áreas en las que el equipo de Korventis ha trabajado: sistemas administrativos, datos, procesos contables e infraestructura."),
   component: NuestraExperiencia,
 });
 
@@ -56,17 +46,17 @@ const areas = [
   {
     icon: Gauge,
     title: "Indicadores ejecutivos para decisiones",
-    text: "Diseñamos dashboards e indicadores clave que permiten a la dirección medir, entender y decidir con datos en tiempo real.",
+    text: "Diseñamos dashboards e indicadores clave que permiten a la dirección medir, entender y decidir con datos con información actualizada.",
   },
   {
     icon: Server,
     title: "Gestión de infraestructura empresarial",
-    text: "Gestionamos infraestructura tecnológica —servidores, virtualización y cloud— para una operación estable y escalable.",
+    text: "Administramos servidores y virtualización según los recursos y el alcance contratados.",
   },
   {
     icon: ShieldCheck,
     title: "Continuidad operativa y documentación",
-    text: "Fortalecemos la continuidad del negocio con monitoreo, respaldos y documentación clara de procesos y sistemas.",
+    text: "Fortalecemos la continuidad del negocio con respaldos y documentación según el servicio contratado de procesos y sistemas.",
   },
   {
     icon: Compass,
@@ -116,7 +106,7 @@ function NuestraExperiencia() {
       <section className="relative overflow-hidden bg-gradient-navy py-24 text-white">
         <div
           className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full opacity-25 blur-3xl"
-          style={{ background: "radial-gradient(circle, #2f80ed, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, #4a2942, transparent 70%)" }}
         />
         <Container className="relative">
           <Reveal className="mx-auto max-w-3xl text-center">

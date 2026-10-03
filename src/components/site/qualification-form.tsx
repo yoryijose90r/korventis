@@ -1,193 +1,208 @@
-import { useState } from "react";
-import { ArrowLeft, ArrowRight, Check, CheckCircle2 } from "lucide-react";
+import { useState, type FormEvent } from "react";
+import { Link } from "@tanstack/react-router";
+import { ArrowLeft, ArrowRight, Check, Loader2 } from "lucide-react";
 import { CtaButton } from "./cta-button";
+import { LeadError, LeadSuccess, useLeadSubmit } from "./lead-submit";
+import { AREAS, AREA_LABELS, leadSchema } from "@/lib/leads.schema";
 import { cn } from "@/lib/utils";
 
-type Area = "tecnologia" | "contabilidad" | "ambas";
-
-const areaOptions: { value: Area; title: string; description: string }[] = [
-  {
-    value: "tecnologia",
-    title: "Tecnología Empresarial",
-    description: "Odoo, datos, BI, automatización e infraestructura",
-  },
-  {
-    value: "contabilidad",
-    title: "Contabilidad y Fiscal",
-    description: "Igualas, nómina, DGII, costos e impuestos",
-  },
-  {
-    value: "ambas",
-    title: "Ambas prácticas",
-    description: "Una solución integral para toda la operación",
-  },
-];
-
-const techServices = ["Odoo", "Bases de datos", "BI", "Automatización", "Infraestructura"];
-const accountingServices = ["Iguala contable", "Nómina", "DGII", "e-CF", "Planeación fiscal", "Costos"];
-
-function ChoiceGroup({
-  label,
-  name,
-  options,
-  required = true,
-}: {
-  label: string;
+type Area = (typeof AREAS)[number];
+type Answers = {
+  area: Area | "";
+  erp: string;
+  users: string;
+  employees: string;
+  services: string[];
+  urgency: string;
   name: string;
-  options: string[];
-  required?: boolean;
-}) {
+  email: string;
+  phone: string;
+  company: string;
+  role: string;
+  message: string;
+  privacy: boolean;
+};
+
+const initial: Answers = { area: "", erp: "", users: "", employees: "", services: [], urgency: "", name: "", email: "", phone: "", company: "", role: "", message: "", privacy: false };
+
+const SERVICES: Record<Area, string[]> = {
+  erp: ["Ventas", "Compras", "Inventario", "Contabilidad en ERP", "Nómina (software)", "Facturación electrónica"],
+  datos: ["Bases de datos", "Business Intelligence", "Reportes", "Integraciones", "Automatización"],
+  contabilidad: ["Contabilidad / iguala", "Obligaciones DGII", "Gestión de nómina", "Costos", "Planeación fiscal"],
+  infraestructura: ["Servidores", "Virtualización", "Respaldos", "Documentación de recuperación"],
+  varias: ["ERP", "Datos", "Contabilidad", "Infraestructura"],
+};
+
+const STEPS = ["Área", "Contexto", "Contacto", "Confirmación"];
+const input = "h-12 w-full rounded-xl border border-input bg-white px-4 text-sm text-navy outline-none transition-colors focus:border-sky focus-visible:ring-2 focus-visible:ring-ring/30";
+
+function Radio({ name, label, options, value, onChange, error }: { name: string; label: string; options: string[]; value: string; onChange: (v: string) => void; error?: string }) {
   return (
-    <fieldset>
+    <fieldset aria-describedby={error ? `${name}-err` : undefined}>
       <legend className="mb-2 text-sm font-semibold text-navy">{label}</legend>
       <div className="grid gap-2 sm:grid-cols-2">
-        {options.map((option) => (
-          <label key={option} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-border bg-white px-4 py-2.5 text-sm text-navy transition-colors hover:border-sky">
-            <input required={required} type="radio" name={name} value={option} className="accent-sky" />
-            {option}
+        {options.map((o) => (
+          <label key={o} className={cn("flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border px-4 py-2.5 text-sm text-navy transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring/40", value === o ? "border-sky bg-mist" : "border-border bg-white hover:border-sky/60")}>
+            <input type="radio" name={name} value={o} checked={value === o} onChange={() => onChange(o)} className="accent-[var(--brand)]" />
+            {o}
           </label>
         ))}
       </div>
-    </fieldset>
-  );
-}
-
-function ServiceChecks({ options, prefix }: { options: string[]; prefix: string }) {
-  return (
-    <fieldset>
-      <legend className="mb-2 text-sm font-semibold text-navy">Servicios de interés</legend>
-      <div className="grid gap-2 sm:grid-cols-2">
-        {options.map((option) => (
-          <label key={option} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-border bg-white px-4 py-2.5 text-sm text-navy transition-colors hover:border-sky">
-            <input type="checkbox" name={`${prefix}-${option}`} className="accent-sky" />
-            {option}
-          </label>
-        ))}
-      </div>
+      {error && <p id={`${name}-err`} className="mt-2 text-xs font-medium text-destructive">{error}</p>}
     </fieldset>
   );
 }
 
 export function QualificationForm() {
-  const [step, setStep] = useState(1);
-  const [area, setArea] = useState<Area | null>(null);
-  const [sent, setSent] = useState(false);
+  const [step, setStep] = useState(0);
+  const [a, setA] = useState<Answers>(initial);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const { state, submit } = useLeadSubmit();
+  const set = <K extends keyof Answers>(k: K, v: Answers[K]) => setA((p) => ({ ...p, [k]: v }));
 
-  const next = () => setStep((current) => Math.min(4, current + 1));
-  const back = () => setStep((current) => Math.max(1, current - 1));
-  const inputClass = "h-12 w-full rounded-xl border border-border bg-white px-4 text-sm text-navy outline-none transition-colors placeholder:text-muted-foreground focus:border-sky";
+  if (state === "sent") return <LeadSuccess />;
 
-  if (sent) {
-    return (
-      <div className="flex min-h-96 flex-col items-center justify-center rounded-3xl border border-border bg-white p-8 text-center shadow-card">
-        <CheckCircle2 className="h-16 w-16 text-sky" />
-        <h3 className="mt-5 font-heading text-2xl font-bold text-navy">Gracias por confiar en Korventis.</h3>
-        <p className="mt-3 max-w-lg text-muted-foreground">
-          Hemos recibido tu solicitud y te contactaremos en menos de 24 horas hábiles.
-        </p>
-      </div>
-    );
-  }
+  const isTech = a.area === "erp" || a.area === "datos" || a.area === "infraestructura" || a.area === "varias";
+
+  const validate = (s: number) => {
+    const e: Record<string, string> = {};
+    if (s === 0 && !a.area) e.area = "Selecciona un área";
+    if (s === 1) {
+      if (isTech && !a.erp) e.erp = "Selecciona una opción";
+      if (a.area === "contabilidad" && !a.employees) e.employees = "Selecciona una opción";
+      if (!a.urgency) e.urgency = "Selecciona una opción";
+    }
+    if (s === 2) {
+      if (a.name.trim().length < 2) e.name = "Escribe tu nombre";
+      if (!/^\S+@\S+\.\S+$/.test(a.email.trim())) e.email = "Correo no válido";
+    }
+    if (s === 3 && !a.privacy) e.privacy = "Debes aceptar la política de privacidad";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const details = (): Record<string, string | string[]> => ({
+    ERP_actual: a.erp,
+    Usuarios: a.users,
+    Empleados: a.employees,
+    Servicios: a.services,
+    Urgencia: a.urgency,
+    Cargo: a.role,
+  });
+
+  const onSubmit = (ev: FormEvent) => {
+    ev.preventDefault();
+    if (!validate(step)) return;
+    if (step < 3) {
+      setStep(step + 1);
+      return;
+    }
+    const parsed = leadSchema.safeParse({
+      source: "calificacion",
+      name: a.name,
+      email: a.email,
+      phone: a.phone || undefined,
+      company: a.company || undefined,
+      area: a.area,
+      message: a.message || undefined,
+      privacy: a.privacy,
+      details: details(),
+    });
+    if (!parsed.success) {
+      setErrors({ privacy: "Revisa los datos de los pasos anteriores." });
+      return;
+    }
+    void submit(parsed.data);
+  };
+
+  const summary = a.area
+    ? `Nombre: ${a.name}\nEmpresa: ${a.company}\nÁrea: ${AREA_LABELS[a.area]}\nServicios: ${a.services.join(", ")}\nUrgencia: ${a.urgency}\n${a.message}`
+    : "";
+  const fieldErr = (k: string) => errors[k] && <p id={`q-${k}-err`} className="text-xs font-medium text-destructive">{errors[k]}</p>;
 
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        if (step < 4) next();
-        else setSent(true);
-      }}
-      className="rounded-3xl border border-border bg-white p-6 shadow-card sm:p-8"
-    >
-      <div className="mb-8 flex items-center gap-2" aria-label={`Paso ${step} de 4`}>
-        {[1, 2, 3, 4].map((item) => (
-          <div key={item} className="flex flex-1 items-center gap-2">
-            <span className={cn("grid h-8 w-8 shrink-0 place-items-center rounded-full text-xs font-bold", item <= step ? "bg-sky text-white" : "bg-mist text-muted-foreground")}>
-              {item < step ? <Check className="h-4 w-4" /> : item}
+    <form onSubmit={onSubmit} noValidate className="rounded-2xl border border-border bg-white p-6 shadow-card sm:p-8">
+      <ol className="mb-8 flex items-center gap-2" aria-label="Progreso del formulario">
+        {STEPS.map((label, i) => (
+          <li key={label} className="flex flex-1 items-center gap-2" aria-current={i === step ? "step" : undefined}>
+            <span className={cn("grid h-8 w-8 shrink-0 place-items-center rounded-full text-xs font-bold transition-colors", i <= step ? "bg-brand text-white" : "bg-mist text-muted-foreground")}>
+              {i < step ? <Check className="h-4 w-4" aria-hidden="true" /> : i + 1}
+              <span className="sr-only"> {label}</span>
             </span>
-            {item < 4 && <span className={cn("h-0.5 w-full", item < step ? "bg-sky" : "bg-border")} />}
-          </div>
+            {i < 3 && <span className={cn("h-0.5 w-full transition-colors", i < step ? "bg-brand" : "bg-border")} />}
+          </li>
         ))}
-      </div>
+      </ol>
+      <p className="text-xs font-semibold uppercase tracking-wide text-sky">Paso {step + 1} de 4 · {STEPS[step]}</p>
 
-      <p className="text-xs font-semibold uppercase tracking-wide text-sky">Paso {step} de 4</p>
-
-      {step === 1 && (
-        <div>
-          <h3 className="mt-2 font-heading text-2xl font-bold text-navy">¿Qué área te interesa?</h3>
-          <div className="mt-6 grid gap-3">
-            {areaOptions.map((option) => (
-              <label key={option.value} className={cn("cursor-pointer rounded-2xl border p-5 transition-all", area === option.value ? "border-sky bg-sky/5 shadow-card" : "border-border bg-white hover:border-sky/50")}>
-                <input className="sr-only" type="radio" name="area" value={option.value} required checked={area === option.value} onChange={() => setArea(option.value)} />
-                <span className="font-heading font-semibold text-navy">{option.title}</span>
-                <span className="mt-1 block text-sm text-muted-foreground">{option.description}</span>
-              </label>
-            ))}
-          </div>
+      {step === 0 && (
+        <div className="mt-4">
+          <Radio name="area" label="¿Qué área te interesa?" options={AREAS.map((x) => AREA_LABELS[x])} value={a.area ? AREA_LABELS[a.area] : ""} onChange={(v) => { const k = AREAS.find((x) => AREA_LABELS[x] === v)!; if (k !== a.area) setA((p) => ({ ...p, area: k, services: [] })); }} error={errors.area} />
         </div>
       )}
 
-      {step === 2 && area && (
-        <div>
-          <h3 className="mt-2 font-heading text-2xl font-bold text-navy">Contexto del proyecto</h3>
-          <div className="mt-6 space-y-6">
-            {(area === "tecnologia" || area === "ambas") && (
-              <div className="space-y-5 border-b border-border pb-6">
-                {area === "ambas" && <h4 className="font-heading font-semibold text-brand">Tecnología Empresarial</h4>}
-                <ChoiceGroup label="¿Ya usas un ERP?" name="erp" options={["Sí, Odoo", "Sí, otro", "No", "Migrando"]} />
-                <ChoiceGroup label="Cantidad estimada de usuarios" name="usuarios" options={["1-5", "6-15", "16-50", "50+"]} />
-                <ServiceChecks options={techServices} prefix="tech" />
-                <ChoiceGroup label="¿Necesitas cumplimiento DGII / e-CF?" name="dgii" options={["Sí", "No", "No sé"]} />
-              </div>
-            )}
-            {(area === "contabilidad" || area === "ambas") && (
-              <div className="space-y-5">
-                {area === "ambas" && <h4 className="font-heading font-semibold text-brand">Contabilidad y Fiscal RD</h4>}
-                <ChoiceGroup label="Tipo de empresa" name="empresa-tipo" options={["Persona física", "SRL", "EIRL", "SA", "Otra"]} />
-                <ChoiceGroup label="Cantidad de empleados" name="empleados" options={["0", "1-5", "6-20", "21-50", "50+"]} />
-                <ServiceChecks options={accountingServices} prefix="accounting" />
-                <ChoiceGroup label="¿Actualmente tienes contador interno?" name="contador" options={["Sí", "No", "Mixto"]} />
-              </div>
-            )}
-            <ChoiceGroup label="Urgencia" name="urgencia" options={["Inmediato", "1-3 meses", "Explorando"]} />
-          </div>
+      {step === 1 && a.area && (
+        <div className="mt-4 space-y-6">
+          {isTech && <Radio name="erp" label="¿Ya usas un ERP?" options={["Sí, Odoo", "Sí, otro", "No", "Migrando"]} value={a.erp} onChange={(v) => set("erp", v)} error={errors.erp} />}
+          {isTech && <Radio name="users" label="Usuarios que operarían el sistema" options={["1-2", "3-5", "6-10", "Más de 10"]} value={a.users} onChange={(v) => set("users", v)} />}
+          {(a.area === "contabilidad" || a.area === "varias" || a.area === "erp") && <Radio name="employees" label="Cantidad de empleados" options={["0-10", "11-25", "26-100", "Más de 100"]} value={a.employees} onChange={(v) => set("employees", v)} error={errors.employees} />}
+          <fieldset>
+            <legend className="mb-2 text-sm font-semibold text-navy">Servicios de interés (opcional)</legend>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {SERVICES[a.area].map((o) => (
+                <label key={o} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-border bg-white px-4 py-2.5 text-sm text-navy hover:border-sky/60 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring/40">
+                  <input type="checkbox" checked={a.services.includes(o)} onChange={(e) => set("services", e.target.checked ? [...a.services, o] : a.services.filter((s) => s !== o))} className="accent-[var(--brand)]" />
+                  {o}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <Radio name="urgency" label="¿Cuándo te gustaría empezar?" options={["Inmediato", "1-3 meses", "Explorando"]} value={a.urgency} onChange={(v) => set("urgency", v)} error={errors.urgency} />
+        </div>
+      )}
+
+      {step === 2 && (
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {([
+            ["name", "Nombre *", "text", "name"],
+            ["email", "Correo electrónico *", "email", "email"],
+            ["phone", "Teléfono o WhatsApp", "tel", "tel"],
+            ["company", "Empresa", "text", "organization"],
+            ["role", "Cargo", "text", "organization-title"],
+          ] as const).map(([k, label, type, ac]) => (
+            <div key={k} className="flex flex-col gap-2">
+              <label htmlFor={`q-${k}`} className="text-sm font-medium text-navy">{label}</label>
+              <input id={`q-${k}`} type={type} autoComplete={ac} value={a[k]} onChange={(e) => set(k, e.target.value)} aria-invalid={!!errors[k]} aria-describedby={errors[k] ? `q-${k}-err` : undefined} className={input} />
+              {fieldErr(k)}
+            </div>
+          ))}
         </div>
       )}
 
       {step === 3 && (
-        <div>
-          <h3 className="mt-2 font-heading text-2xl font-bold text-navy">Datos de contacto</h3>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            <input required name="nombre" aria-label="Nombre completo" placeholder="Nombre completo" className={inputClass} />
-            <input required name="empresa" aria-label="Empresa" placeholder="Empresa" className={inputClass} />
-            <input name="rnc" aria-label="RNC opcional" placeholder="RNC (opcional)" className={inputClass} />
-            <input required type="email" name="email" aria-label="Email corporativo" placeholder="Email corporativo" className={inputClass} />
-            <input required type="tel" name="telefono" aria-label="Teléfono o WhatsApp" placeholder="Teléfono / WhatsApp" className={inputClass} />
-            <input required name="cargo" aria-label="Cargo" placeholder="Cargo" className={inputClass} />
-          </div>
-        </div>
-      )}
-
-      {step === 4 && (
-        <div>
-          <h3 className="mt-2 font-heading text-2xl font-bold text-navy">Mensaje y confirmación</h3>
-          <textarea name="mensaje" rows={5} aria-label="Mensaje adicional" placeholder="Mensaje adicional (opcional)" className="mt-6 w-full rounded-xl border border-border bg-white px-4 py-3 text-sm text-navy outline-none transition-colors placeholder:text-muted-foreground focus:border-sky" />
-          <label className="mt-4 flex cursor-pointer items-start gap-3 text-sm text-navy/80">
-            <input required type="checkbox" name="privacidad" className="mt-1 accent-sky" />
-            Acepto la política de privacidad.
+        <div className="mt-4">
+          <label htmlFor="q-message" className="text-sm font-medium text-navy">Mensaje adicional (opcional)</label>
+          <textarea id="q-message" rows={4} value={a.message} onChange={(e) => set("message", e.target.value)} className="mt-2 w-full rounded-xl border border-input bg-white px-4 py-3 text-sm text-navy outline-none focus:border-sky focus-visible:ring-2 focus-visible:ring-ring/30" />
+          <label htmlFor="q-privacy" className="mt-4 flex cursor-pointer items-start gap-3 text-sm text-navy/85">
+            <input id="q-privacy" type="checkbox" checked={a.privacy} onChange={(e) => set("privacy", e.target.checked)} aria-invalid={!!errors.privacy} aria-describedby={errors.privacy ? "q-privacy-err" : undefined} className="mt-1 h-4 w-4 accent-[var(--brand)]" />
+            <span>He leído la <Link to="/privacidad" className="font-semibold text-brand underline underline-offset-2">política de privacidad</Link> y acepto que Korventis use estos datos para responder mi solicitud.</span>
           </label>
+          {fieldErr("privacy")}
         </div>
       )}
 
       <div className="mt-8 flex items-center justify-between gap-3">
-        {step > 1 ? (
-          <CtaButton type="button" variant="outline" size="md" onClick={back}>
+        {step > 0 ? (
+          <CtaButton type="button" variant="outline" size="md" onClick={() => { setErrors({}); setStep(step - 1); }}>
             <ArrowLeft className="h-4 w-4" /> Atrás
           </CtaButton>
         ) : <span />}
-        <CtaButton type="submit" variant="primary" size="md" disabled={step === 1 && !area}>
-          {step === 4 ? "Enviar solicitud" : "Continuar"} <ArrowRight className="h-4 w-4" />
+        <CtaButton type="submit" variant="primary" size="md" disabled={state === "sending"} aria-busy={state === "sending"}>
+          {state === "sending" ? <><Loader2 className="h-4 w-4 animate-spin" /> Enviando…</> : step === 3 ? "Enviar solicitud" : <>Continuar <ArrowRight className="h-4 w-4" /></>}
         </CtaButton>
       </div>
+
+      <LeadError state={state} summary={summary} />
     </form>
   );
 }
