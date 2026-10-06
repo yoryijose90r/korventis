@@ -30,21 +30,21 @@ export function useLeadSubmit() {
       const lines = Object.entries(lead.details ?? {})
         .filter(([, v]) => (Array.isArray(v) ? v.length : String(v).trim()))
         .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(", ") : v}`);
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_ACCESS_KEY,
-          subject: `Nueva solicitud web (${lead.source}) — ${lead.name}`,
-          from_name: "Sitio web Korventis",
-          name: lead.name,
-          email: lead.email,
-          phone: lead.phone ?? "",
-          company: lead.company ?? "",
-          area: AREA_LABELS[lead.area],
-          message: [lead.message ?? "", "", ...lines].join("\n"),
-        }),
-      });
+      const fields: Record<string, string> = {
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `Nueva solicitud web (${lead.source}) — ${lead.name}`,
+        from_name: "Sitio web Korventis",
+        name: lead.name,
+        email: lead.email,
+        phone: lead.phone ?? "",
+        company: lead.company ?? "",
+        area: AREA_LABELS[lead.area],
+        message: [lead.message ?? "", "", ...lines].join("\n"),
+      };
+      const form = new FormData();
+      for (const [k, v] of Object.entries(fields)) form.append(k, v);
+      // FormData keeps this a "simple" CORS request (no preflight).
+      const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: form });
       const json = (await res.json().catch(() => null)) as { success?: boolean } | null;
       setState(res.ok && json?.success === true ? "sent" : "error");
     } catch {
