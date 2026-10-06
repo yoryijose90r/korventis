@@ -14,105 +14,145 @@ export const CONTACT = {
   siteUrl: "https://korventis.lovable.app",
 } as const;
 
-export const PRICE_NOTICE =
-  "Precios de lanzamiento propuestos, sujetos a confirmación de alcance. Importes en RD$, antes de impuestos aplicables.";
+export const PRICE_NOTICE = "Importes antes de impuestos aplicables. Los precios “desde” requieren alcance confirmado.";
 
 export type ErpPlan = {
   id: string;
   name: string;
   monthly: string;
-  monthlyFrom: boolean;
   usersIncluded: number;
-  extraUser: string;
-  hosting: string;
-  implementation: string;
-  idealFor: string;
+  pos: string;
+  assistance: string;
 };
 
 export const ERP_PLANS: ErpPlan[] = [
-  {
-    id: "start",
-    name: "Start",
-    monthly: "RD$3,500",
-    monthlyFrom: false,
-    usersIncluded: 2,
-    extraUser: "RD$750/mes",
-    hosting: "Alojamiento compartido incluido",
-    implementation: "Desde RD$25,000",
-    idealFor: "Negocios que inician su operación en un ERP.",
-  },
-  {
-    id: "pyme",
-    name: "Pyme",
-    monthly: "RD$6,500",
-    monthlyFrom: false,
-    usersIncluded: 5,
-    extraUser: "RD$700/mes",
-    hosting: "Alojamiento compartido incluido",
-    implementation: "Desde RD$45,000",
-    idealFor: "Pymes con ventas, compras e inventario en marcha.",
-  },
-  {
-    id: "business",
-    name: "Business",
-    monthly: "RD$12,500",
-    monthlyFrom: false,
-    usersIncluded: 10,
-    extraUser: "RD$650/mes",
-    hosting: "Alojamiento administrado con recursos definidos en la propuesta",
-    implementation: "Desde RD$75,000",
-    idealFor: "Empresas con varios departamentos y mayor volumen.",
-  },
-  {
-    id: "dedicated",
-    name: "Dedicated",
-    monthly: "RD$18,000",
-    monthlyFrom: true,
-    usersIncluded: 10,
-    extraUser: "RD$650/mes",
-    hosting: "VPS exclusivo dimensionado en la propuesta",
-    implementation: "Desde RD$100,000",
-    idealFor: "Operaciones que requieren un entorno exclusivo.",
-  },
+  { id: "start", name: "Start", monthly: "RD$990", usersIncluded: 1, pos: "No incluido", assistance: "30 minutos/mes" },
+  { id: "pyme", name: "Pyme", monthly: "RD$1,990", usersIncluded: 3, pos: "1 punto", assistance: "60 minutos/mes" },
+  { id: "business", name: "Business", monthly: "RD$3,490", usersIncluded: 5, pos: "2 puntos", assistance: "90 minutos/mes" },
 ];
+
+export const ERP_EXTRA_USER = "RD$350/mes";
+
+export const ERP_DEDICATED = {
+  name: "Dedicated",
+  label: "Entorno exclusivo · propuesta a medida",
+  text: "Dimensionamos ERP e infraestructura juntos antes de presentar un precio total, sin duplicar alojamiento.",
+};
 
 export const ERP_RULES = [
-  "Cada plan cubre un RNC o empresa base.",
-  "El alojamiento ya está incluido en la mensualidad; no se suma un cargo adicional de nube.",
-  "La implementación comprende configuración, importación mediante plantillas acordadas, capacitación y puesta en marcha.",
-  "Migraciones complejas, personalizaciones, equipos, visitas e integraciones se cotizan aparte.",
-  "Mantenimiento, respaldos y soporte según lo establecido en el contrato.",
+  "Cada plan cubre una empresa/RNC.",
+  "Incluyen alojamiento compartido administrado, mantenimiento estándar, respaldos y monitoreo según contrato, sin cargos adicionales de nube.",
+  "Ventas, compras, inventario y funciones contables según los módulos validados en el alcance.",
+  "Nómina, e-CF, desarrollos y servicio profesional contable son adicionales.",
 ];
 
-export const PAYROLL = {
-  base: "Desde RD$1,000/mes",
-  baseDetail: "Incluye el módulo y hasta 10 empleados únicos procesados.",
-  tier: "De 11 a 100 empleados: RD$100 por empleado procesado al mes, en total.",
-  above: "Más de 100 empleados: cotización.",
-  setup: "Configuración inicial estándar: desde RD$8,000.",
-  examples: [
-    ["10 empleados", "RD$1,000/mes"],
-    ["15 empleados", "RD$1,500/mes"],
-    ["25 empleados", "RD$2,500/mes"],
-  ] as [string, string][],
-  notes: [
-    "El mínimo forma parte del precio: no se suma RD$1,000 más RD$100 por empleado.",
-    "Un empleado se cuenta una vez aunque tenga varios procesamientos en el mes.",
-    "Recibir un recibo no convierte al empleado en usuario del ERP; quien opera la nómina necesita un usuario de acceso.",
-    "No incluye salarios, impuestos, aportes patronales ni la gestión contable de la nómina.",
-    "Funciones sujetas a validación y al alcance del módulo.",
+export type PriceRow = { name: string; price: string; scope: string };
+
+export const SETUP_OPTIONS: PriceRow[] = [
+  { name: "Activación autogestionada", price: "Sin cargo inicial", scope: "Plantilla y guía; el cliente configura e importa. Disponibilidad sujeta a confirmación." },
+  { name: "Configuración asistida", price: "RD$5,000", scope: "Hasta 4 horas, configuración básica y una importación por plantilla." },
+  { name: "Implementación operativa", price: "RD$15,000", scope: "Hasta 12 horas, procesos estándar, importaciones acordadas y capacitación." },
+  { name: "Implementación especializada", price: "Desde RD$30,000", scope: "Alcance y entregables definidos mediante propuesta." },
+];
+
+export const SETUP_NOTE =
+  "Se elige una sola modalidad; no se suman entre sí. Migraciones históricas y personalizaciones adicionales se cotizan aparte.";
+
+export const ERP_PAYROLL: [string, string][] = [
+  ["1–10", "RD$990/mes"],
+  ["11–40", "RD$1,990/mes"],
+  ["41–100", "RD$3,490/mes"],
+  ["Más de 100", "Propuesta a medida"],
+];
+
+export const ERP_PAYROLL_NOTE =
+  "Empleados únicos procesados al mes. El módulo está incluido en el escalón, sin cargo por empleado dentro del cupo. Configuración inicial desde RD$5,000 (pago único), salvo inclusión expresa en la implementación.";
+
+export type AccountingPlan = { id: string; name: string; monthly: string; docs: string; banks: number; deliverables: string };
+
+export const ACCOUNTING_PLANS: AccountingPlan[] = [
+  { id: "esencial", name: "Esencial", monthly: "RD$9,500", docs: "Hasta 40", banks: 1, deliverables: "Resumen mensual de resultados y situación contable." },
+  { id: "gestion", name: "Gestión", monthly: "RD$14,500", docs: "Hasta 70", banks: 2, deliverables: "Lo anterior, cuentas por cobrar y por pagar, y reunión mensual de hasta 30 minutos." },
+  { id: "direccion", name: "Dirección", monthly: "RD$22,500", docs: "Hasta 150", banks: 3, deliverables: "Lo anterior, indicadores de ingresos, gastos y liquidez, y reunión mensual de hasta 60 minutos." },
+];
+
+export const ACCOUNTING_INCLUDES =
+  "Registro contable, conciliaciones dentro del cupo, cierre mensual y preparación/presentación de las obligaciones mensuales aplicables acordadas en contrato. Cada plan cubre una empresa/RNC con operaciones corrientes y documentación completa.";
+
+export const ACCOUNTING_ONBOARDING = { price: "RD$7,500", text: "Incorporación y organización inicial, pago único: documentación corriente y configuración estándar. No incluye reconstruir períodos anteriores." };
+
+export const ACCOUNTING_NOTES = [
+  "Documento: cada factura de venta, compra, gasto o nota de crédito registrada, contada una sola vez.",
+  "Operaciones intensivas, importaciones, múltiples sucursales o registros complejos requieren propuesta particular, aunque no superen el cupo.",
+  "Declaraciones anuales, auditorías, certificaciones, litigios, atrasos y regularización histórica se cotizan aparte.",
+  "Si aumenta el volumen, revisamos el plan antes del siguiente período, sin cobros retroactivos.",
+  "Incluye la plataforma que utiliza Korventis para prestar el servicio y entregar reportes. No requiere contratar un ERP ni da acceso operativo a ventas, inventario o POS.",
+];
+
+export const MANAGED_PAYROLL: [string, string][] = [
+  ["1–10", "RD$2,500/mes"],
+  ["11–40", "RD$4,500/mes"],
+  ["41–100", "RD$7,500/mes"],
+  ["Más de 100", "Propuesta a medida"],
+];
+
+export const MANAGED_PAYROLL_NOTES = [
+  "Servicio profesional: un ciclo ordinario mensual, cálculo, recibos y archivos de obligaciones laborales acordados.",
+  "No incluye salarios, aportes, prestaciones extraordinarias ni asesoría legal. Procesos adicionales se cotizan.",
+  "Configuración inicial desde RD$5,000, solo si no está incluida en la incorporación.",
+  "Es distinto del módulo de nómina del ERP; cuando Korventis opera la nómina no se suma la mensualidad del módulo.",
+];
+
+export const ACCOUNTANT_ENABLEMENT = {
+  title: "Habilitación y capacitación del contador",
+  price: "RD$6,500",
+  points: [
+    "Pago único: permisos para una persona y hasta tres horas de capacitación remota en las funciones contables habilitadas.",
+    "Usuario adicional RD$350/mes, solo si requiere acceso y no hay un usuario disponible en su plan.",
+    "Recibir los reportes y exportaciones incluidos en la iguala no tiene cargo.",
+    "No sustituye el servicio contable: se define quién registra, revisa y presenta cada obligación.",
+    "Disponible cuando los permisos y funciones estén validados.",
   ],
 };
 
+export const DATA_SERVICES: PriceRow[] = [
+  { name: "Analítica con Metabase", price: "Desde US$600/proyecto", scope: "Una fuente preparada y tres visualizaciones simples." },
+  { name: "Alojamiento y mantenimiento de Metabase", price: "Desde US$50/mes", scope: "Operación estándar según recursos y alcance; sin nuevos desarrollos." },
+  { name: "Tablero gerencial Power BI", price: "Desde US$900/proyecto", scope: "Una fuente preparada, un tablero de hasta dos páginas y cinco indicadores acordados." },
+  { name: "Consultoría DBA especializada", price: "US$125/hora", scope: "Oracle, SQL Server y PostgreSQL." },
+  { name: "Diagnóstico técnico de bases de datos", price: "Desde US$400", scope: "Una instancia, revisión delimitada e informe priorizado; sin ejecución de correcciones." },
+  { name: "Desarrollo SQL e integraciones de datos", price: "Desde US$125/hora", scope: "Estimación y entregables aprobados." },
+  { name: "Migración de bases de datos", price: "Propuesta a medida", scope: "Evaluación, pruebas, validación y plan de reversión según proyecto." },
+];
+
+export const DATA_NOTES = [
+  "Los proyectos iniciales de analítica no incluyen limpieza extensa, fuentes adicionales, ETL complejo ni licencias.",
+  "DBA: mínimo facturable de una hora; después, bloques de 30 minutos.",
+  "Intervenciones en producción requieren alcance, ventana y autorización. Sin atención 24/7 ni recuperación garantizada.",
+  "Licencias, infraestructura y costos externos se identifican aparte.",
+];
+
+export const ASSISTANCE: [string, string][] = [
+  ["Asistencia funcional o formación adicional", "RD$1,500/hora"],
+  ["Bolsa de dos horas", "RD$2,500"],
+  ["Bolsa de cuatro horas", "RD$5,000"],
+];
+
+export const ASSISTANCE_NOTES = [
+  "Bolsas válidas por 30 días, sin acumulación; renovación según acuerdo.",
+  "No incluyen desarrollo, DBA ni contabilidad profesional.",
+  "La corrección de fallos atribuibles al servicio de Korventis no consume horas.",
+];
+
+export const DIAGNOSES: PriceRow[] = [
+  { name: "Conversación inicial", price: "Gratuita", scope: "Hasta 20 minutos." },
+  { name: "Diagnóstico focalizado", price: "US$100", scope: "Hasta 90 minutos." },
+  { name: "Diagnóstico empresarial", price: "US$300", scope: "Hasta cuatro horas." },
+];
+
 export const ECF = {
   summary:
-    "Facturación electrónica mediante integración con proveedor externo. La propuesta identifica habilitación, cuota incluida, excedentes, certificado y responsabilidades.",
-  notes: [
-    "El servicio e-CF se cotiza por separado, salvo inclusión expresa en la propuesta.",
-    "El certificado digital y su renovación se identifican aparte.",
-    "El conteo de emisiones, reintentos y excedentes depende del contrato con el proveedor.",
-    "Las tarifas del servicio corresponden a Korventis o al proveedor, no a la DGII.",
-  ],
+    "Propuesta según proveedor: habilitación, documentos incluidos, excedentes y certificado. Sin cuotas por comprobante inventadas ni duplicación de pagos directos al proveedor.",
 };
 
 export const FISCAL_SCOPE =
@@ -124,7 +164,7 @@ export const LINES = [
     letter: "A",
     title: "Korventis ERP",
     text: "Odoo como solución estandarizada para operar ventas, compras, inventario y otras funciones según el alcance acordado.",
-    points: ["Planes mensuales con alojamiento incluido", "Implementación con alcance documentado", "Nómina como adicional opcional de software"],
+    points: ["Planes mensuales con alojamiento incluido", "Puesta en marcha con alcance documentado", "Nómina como adicional opcional de software"],
   },
   {
     id: "datos",
@@ -171,12 +211,12 @@ export const DELIVERABLES = [
 export const CONVERSATION_VS_DIAGNOSIS = {
   conversation: {
     title: "Conversación inicial",
-    price: "Sin costo",
+    price: "Gratuita · hasta 20 minutos",
     points: ["Conocemos tus necesidades", "Identificamos el servicio adecuado", "Te explicamos los siguientes pasos"],
   },
   diagnosis: {
     title: "Diagnóstico profesional",
-    price: "Se cotiza según alcance",
+    price: "Desde US$100",
     points: ["Análisis de procesos, datos o sistemas", "Informe escrito con hallazgos", "Recomendaciones y hoja de ruta"],
   },
 };
@@ -184,11 +224,11 @@ export const CONVERSATION_VS_DIAGNOSIS = {
 export const FAQS: [string, string][] = [
   [
     "¿Cuánto cuesta Korventis ERP?",
-    "Los planes de lanzamiento propuestos van desde RD$3,500 al mes (plan Start, 2 usuarios) con alojamiento incluido. La implementación se paga aparte, desde RD$25,000. Todos los importes están sujetos a confirmación de alcance y antes de impuestos.",
+    "Los planes van desde RD$990 al mes (plan Start, 1 usuario) con alojamiento administrado incluido. La puesta en marcha es un pago único según la modalidad elegida. Importes antes de impuestos aplicables.",
   ],
   [
     "¿La conversación inicial tiene costo?",
-    "No. La conversación inicial sirve para conocer tus necesidades y determinar el servicio adecuado. El diagnóstico profesional, con informe y recomendaciones, se cotiza por separado.",
+    "No. La conversación inicial sirve para conocer tus necesidades y determinar el servicio adecuado. Dura hasta 20 minutos. Los diagnósticos tienen costo: focalizado US$100 y empresarial US$300.",
   ],
   [
     "¿Incluyen facturación electrónica (e-CF)?",
