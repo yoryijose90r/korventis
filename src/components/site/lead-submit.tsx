@@ -2,14 +2,18 @@ import { useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { AlertTriangle, CheckCircle2, Mail, MessageCircle } from "lucide-react";
 import { submitLead } from "@/lib/leads.functions";
-import type { LeadInput } from "@/lib/leads.schema";
+import { AREA_LABELS, type LeadInput } from "@/lib/leads.schema";
 import { CONTACT } from "@/lib/offer";
+
+// Web3Forms access keys are public by design (they only route submissions to the
+// owner's inbox); the free plan requires browser-side submission.
+const WEB3FORMS_ACCESS_KEY = "1d102d18-9638-4ebf-9a93-63ed5270ea29";
 
 export type SubmitState = "idle" | "sending" | "sent" | "not_configured" | "error";
 
 /** Shared submission mechanism for every lead form. Guards against duplicate sends. */
 export function useLeadSubmit() {
-  const send = useServerFn(submitLead);
+  const validate = useServerFn(submitLead);
   const [state, setState] = useState<SubmitState>("idle");
   const inFlight = useRef(false);
 
@@ -18,9 +22,31 @@ export function useLeadSubmit() {
     inFlight.current = true;
     setState("sending");
     try {
-      const res = await send({ data: payload });
-      if (res.ok) setState("sent");
-      else setState(res.reason === "not_configured" ? "not_configured" : "error");
+      const { lead, bot } = await validate({ data: payload });
+      if (bot) {
+        setState("sent");
+        return;
+      }
+      const lines = Object.entries(lead.details ?? {})
+        .filter(([, v]) => (Array.isArray(v) ? v.length : String(v).trim()))
+        .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(", ") : v}`);
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `Nueva solicitud web (${lead.source}) — ${lead.name}`,
+          from_name: "Sitio web Korventis",
+          name: lead.name,
+          email: lead.email,
+          phone: lead.phone ?? "",
+          company: lead.company ?? "",
+          area: AREA_LABELS[lead.area],
+          message: [lead.message ?? "", "", ...lines].join("\n"),
+        }),
+      });
+      const json = (await res.json().catch(() => null)) as { success?: boolean } | null;
+      setState(res.ok && json?.success === true ? "sent" : "error");
     } catch {
       setState("error");
     } finally {
