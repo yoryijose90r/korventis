@@ -3,7 +3,7 @@ import { Check, Info } from "lucide-react";
 import type { ReactNode } from "react";
 import { SiteShell } from "@/components/site/site-shell";
 import { PageHero, Container, SectionHeading } from "@/components/site/primitives";
-import { CtaLink } from "@/components/site/cta-button";
+import { CtaLink, ContactCta } from "@/components/site/cta-button";
 import { Reveal } from "@/components/site/reveal";
 import { ErpPlansGrid } from "@/components/site/offer-blocks";
 import {
@@ -126,7 +126,7 @@ function Precios() {
                     <div className="rounded-xl bg-mist p-3"><dt className="text-xs text-muted-foreground">Cuentas bancarias</dt><dd className="font-semibold text-navy">{p.banks}</dd></div>
                   </dl>
                   <p className="mt-4 flex-1 text-sm text-navy/85">{p.deliverables}</p>
-                  <CtaLink to="/contacto" search={{ servicio: "contabilidad", plan: `Gestión contable ${p.name}` }} variant="outline" className="mt-6 w-full">Solicitar gestión contable</CtaLink>
+                  <ContactCta servicio={"contabilidad"} plan={`Gestión contable ${p.name}`} variant="outline" className="mt-6 w-full">Solicitar gestión contable</ContactCta>
                 </div>
               </Reveal>
             ))}
@@ -155,7 +155,7 @@ function Precios() {
           <SectionHeading eyebrow="Datos y bases de datos · Precios en US$" title="Analítica e ingeniería de datos" subtitle="Tarifas propias en US$; no son una conversión cambiaria. Cada propuesta confirma los entregables antes de contratar." />
           <div className="mt-10"><RowsTable rows={DATA_SERVICES} caption="Servicios de datos y bases de datos" /></div>
           <div className="mx-auto mt-8 max-w-3xl"><List items={DATA_NOTES} /></div>
-          <div className="mt-10 text-center"><CtaLink to="/contacto" search={{ servicio: "datos", plan: "Datos y bases de datos" }} size="lg">Definir mi proyecto</CtaLink></div>
+          <div className="mt-10 text-center"><ContactCta servicio={"datos"} plan={"Datos y bases de datos"} size="lg">Definir mi proyecto</ContactCta></div>
         </Container>
       </section>
 
