@@ -10,6 +10,10 @@ import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contacto")({
   head: () => seo("/contacto", "Contacto | Agenda una conversación inicial — Korventis", "Agenda una conversación inicial sin costo con Korventis para definir el servicio adecuado para tu empresa."),
+  validateSearch: (s: Record<string, unknown>): { servicio?: string; plan?: string } => ({
+    servicio: typeof s.servicio === "string" ? s.servicio : undefined,
+    plan: typeof s.plan === "string" ? s.plan.slice(0, 80) : undefined,
+  }),
   component: Contacto,
 });
 
@@ -21,6 +25,7 @@ const info = [
 ];
 
 function Contacto() {
+  const { servicio, plan } = Route.useSearch();
   return (
     <SiteShell>
       <PageHero eyebrow="Contacto" title="Agenda una conversación inicial" subtitle="Sin costo. Conocemos tus necesidades y te indicamos el servicio adecuado." />
@@ -41,7 +46,7 @@ function Contacto() {
             </dl>
             <div className="mt-8"><ContactFallback /></div>
           </div>
-          <ContactForm />
+          <ContactForm area={servicio} plan={plan} />
         </Container>
       </section>
       <section className="bg-mist py-20">

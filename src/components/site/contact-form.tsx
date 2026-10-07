@@ -12,8 +12,12 @@ const initial: Values = { name: "", email: "", phone: "", company: "", area: "",
 const field = "h-12 w-full rounded-xl border border-input bg-white px-4 text-sm text-navy outline-none transition-colors placeholder:text-muted-foreground focus:border-sky focus-visible:ring-2 focus-visible:ring-ring/30";
 
 /** Short first-contact form: no RNC or extensive data required. */
-export function ContactForm() {
-  const [v, setV] = useState<Values>(initial);
+export function ContactForm({ area, plan }: { area?: string; plan?: string } = {}) {
+  const [v, setV] = useState<Values>(() => ({
+    ...initial,
+    area: area && (AREAS as readonly string[]).includes(area) ? area : "",
+    message: plan ? `Interés: ${plan}\n` : "",
+  }));
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { state, submit } = useLeadSubmit();
   const set = <K extends keyof Values>(k: K, val: Values[K]) => setV((p) => ({ ...p, [k]: val }));
