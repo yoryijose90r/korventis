@@ -1,3 +1,4 @@
+import type React from "react";
 import { Link } from "@tanstack/react-router";
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ComponentProps } from "react";
@@ -52,3 +53,19 @@ export function CtaLink({
 }
 
 export { buttonVariants };
+
+/** CTA to the contact page that preserves the chosen service and plan. */
+export function ContactCta({
+  variant,
+  size,
+  className,
+  servicio,
+  plan,
+  children,
+}: BaseProps & { servicio: string; plan: string; children: React.ReactNode }) {
+  return (
+    <Link to="/contacto" search={{ servicio, plan }} className={cn(buttonVariants({ variant, size }), className)}>
+      {children}
+    </Link>
+  );
+}

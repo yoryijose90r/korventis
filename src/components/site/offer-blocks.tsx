@@ -1,7 +1,7 @@
 import { Check } from "lucide-react";
 import { DELIVERABLES, ERP_PLANS, ERP_EXTRA_USER, ERP_DEDICATED, METHOD, PRICE_NOTICE, CONVERSATION_VS_DIAGNOSIS, FAQS } from "@/lib/offer";
 import { Reveal } from "./reveal";
-import { CtaLink } from "./cta-button";
+import { CtaLink, ContactCta } from "./cta-button";
 
 const tick = <Check className="mt-0.5 h-4 w-4 shrink-0 text-sky" aria-hidden="true" />;
 
@@ -25,7 +25,7 @@ export function ErpPlansGrid() {
                 <li className="flex gap-2">{tick}Asistencia de uso: {p.assistance}</li>
                 <li className="flex gap-2">{tick}Usuario adicional: {ERP_EXTRA_USER}</li>
               </ul>
-              <CtaLink to="/contacto" search={{ servicio: "erp", plan: `ERP ${p.name}` }} variant="outline" size="md" className="mt-6 w-full">Solicitar propuesta ERP</CtaLink>
+              <ContactCta servicio={"erp"} plan={`ERP ${p.name}`} variant="outline" size="md" className="mt-6 w-full">Solicitar propuesta ERP</ContactCta>
             </div>
           </Reveal>
         ))}
@@ -34,7 +34,7 @@ export function ErpPlansGrid() {
             <h3 className="font-heading text-xl font-bold">{ERP_DEDICATED.name}</h3>
             <p className="mt-4 font-heading text-lg font-semibold text-sky">{ERP_DEDICATED.label}</p>
             <p className="mt-3 flex-1 text-sm text-silver/90">{ERP_DEDICATED.text}</p>
-            <CtaLink to="/contacto" search={{ servicio: "erp", plan: "ERP Dedicated" }} variant="white" size="md" className="mt-6 w-full">Solicitar propuesta ERP</CtaLink>
+            <ContactCta servicio={"erp"} plan={"ERP Dedicated"} variant="white" size="md" className="mt-6 w-full">Solicitar propuesta ERP</ContactCta>
           </div>
         </Reveal>
       </div>
