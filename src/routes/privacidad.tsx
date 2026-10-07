@@ -26,7 +26,7 @@ function Privacidad() {
           <p>Los datos que envías en nuestros formularios (nombre, correo, teléfono, empresa, área de interés y mensaje) se usan únicamente para responder tu solicitud.</p>
           <p>No vendemos ni compartimos esta información con fines publicitarios.</p>
           <p>Para consultar, corregir o eliminar tus datos, escríbenos a {CONTACT.email}.</p>
-          <p className="text-sm">Esta política se completará con el proveedor de recepción de formularios y los plazos de conservación una vez definidos.</p>
+          <p className="text-sm">Las solicitudes enviadas desde los formularios se reciben a través de Web3Forms, proveedor externo de recepción de formularios, y se entregan a contacto@korventis.net. El plazo de conservación de los datos está pendiente de definición por Korventis y se publicará antes de la versión definitiva de esta política.</p>
         </Container>
       </section>
     </SiteShell>

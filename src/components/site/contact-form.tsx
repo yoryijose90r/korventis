@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import { Loader2, Send } from "lucide-react";
 import { CtaButton } from "./cta-button";
@@ -18,6 +18,14 @@ export function ContactForm({ area, plan }: { area?: string; plan?: string } = {
     area: area && (AREAS as readonly string[]).includes(area) ? area : "",
     message: plan ? `Interés: ${plan}\n` : "",
   }));
+  // If the visitor picks another plan while Contacto is open, update only the selection.
+  useEffect(() => {
+    setV((p) => {
+      const nextArea = area && (AREAS as readonly string[]).includes(area) ? area : p.area;
+      const body = p.message.replace(/^Interés: .*\n?/, "");
+      return { ...p, area: nextArea, message: plan ? `Interés: ${plan}\n${body}` : p.message };
+    });
+  }, [area, plan]);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { state, submit } = useLeadSubmit();
   const set = <K extends keyof Values>(k: K, val: Values[K]) => setV((p) => ({ ...p, [k]: val }));
