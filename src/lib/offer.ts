@@ -1,9 +1,8 @@
-// Single source of truth for commercial data shown on Home, Planes, Contacto and FAQ.
+// Single source of truth for commercial data shown on Home, Precios, Contacto and FAQ.
 // Prices are proposed launch prices in RD$, before applicable taxes, subject to scope confirmation.
 
 export const CONTACT = {
   email: "contacto@korventis.net",
-  emailSecondary: "info@korventis.net",
   phoneDisplay: "+1 (829) 686-2720",
   phoneTel: "+18296862720",
   whatsapp: "18296862720",
@@ -46,13 +45,26 @@ export const ERP_RULES = [
   "Nómina, e-CF, desarrollos y servicio profesional contable son adicionales.",
 ];
 
-export type PriceRow = { name: string; price: string; scope: string };
+export const PRICING_INTRO =
+  "Selecciona el servicio que necesitas y el acompañamiento que prefieres. Puedes contratar ERP, gestión contable o servicios de datos por separado. La puesta en marcha se paga una vez; las mensualidades y adicionales se detallan en tu propuesta.";
+
+export const ERP_CARD_NOTE =
+  "Tu equipo opera el sistema. La puesta en marcha se elige por separado. Nómina y e-CF son adicionales opcionales.";
+
+export const PRICING_EXAMPLES: [string, string][] = [
+  ["ERP Pyme con configuración asistida", "RD$1,990/mes + RD$5,000 de pago único."],
+  ["Contabilidad Esencial", "RD$9,500/mes + RD$7,500 de incorporación inicial (pago único). No requiere contratar ERP."],
+];
+export const EXAMPLES_NOTE = "Antes de impuestos aplicables. Adicionales no incluidos.";
+
+export type PriceRow = { name: string; price: string; scope: string; who?: string; available?: boolean };
 
 export const SETUP_OPTIONS: PriceRow[] = [
-  { name: "Activación autogestionada", price: "Sin cargo inicial", scope: "Plantilla y guía; el cliente configura e importa. Disponibilidad sujeta a confirmación." },
-  { name: "Configuración asistida", price: "RD$5,000", scope: "Hasta 4 horas, configuración básica y una importación por plantilla." },
-  { name: "Implementación operativa", price: "RD$15,000", scope: "Hasta 12 horas, procesos estándar, importaciones acordadas y capacitación." },
-  { name: "Implementación especializada", price: "Desde RD$30,000", scope: "Alcance y entregables definidos mediante propuesta." },
+  // Hidden until the owner confirms the self-service process works.
+  { name: "Activación autogestionada", who: "El cliente", price: "Sin cargo inicial", scope: "Plantilla y guía; el cliente configura e importa.", available: false },
+  { name: "Configuración asistida", who: "Korventis con el cliente", price: "RD$5,000", scope: "Hasta 4 horas, configuración básica, una importación por plantilla y orientación." },
+  { name: "Implementación operativa", who: "Korventis", price: "RD$15,000", scope: "Hasta 12 horas, procesos estándar, importaciones acordadas y capacitación." },
+  { name: "Implementación especializada", who: "Según proyecto", price: "Desde RD$30,000", scope: "Alcance y entregables definidos mediante propuesta." },
 ];
 
 export const SETUP_NOTE =
@@ -66,7 +78,19 @@ export const ERP_PAYROLL: [string, string][] = [
 ];
 
 export const ERP_PAYROLL_NOTE =
-  "Empleados únicos procesados al mes. El módulo está incluido en el escalón, sin cargo por empleado dentro del cupo. Configuración inicial desde RD$5,000 (pago único), salvo inclusión expresa en la implementación.";
+  "Software adicional: tu equipo procesa la nómina. Empleados únicos procesados al mes, sin cargo por empleado dentro del cupo. Los empleados procesados no son usuarios de acceso al ERP.";
+
+export const PAYROLL_SETUP =
+  "Configuración inicial desde RD$5,000, pago único, solo si no está incluida expresamente en la implementación o incorporación contratada.";
+
+export const PAYROLL_CLARIFY =
+  "Cuando Korventis utiliza su plataforma para prestar el servicio de nómina administrada, no añade otra mensualidad por ese módulo interno.";
+
+export const ACCOUNTING_LEAD =
+  "Korventis realiza la gestión contable contratada y entrega los reportes incluidos. No necesitas contratar un ERP adicional para recibir este servicio.";
+
+export const DATA_INTRO =
+  "Proyectos con entregables definidos y consultoría especializada. Precios expresados en dólares estadounidenses.";
 
 export type AccountingPlan = { id: string; name: string; monthly: string; docs: string; banks: number; deliverables: string };
 
@@ -99,13 +123,14 @@ export const MANAGED_PAYROLL: [string, string][] = [
 export const MANAGED_PAYROLL_NOTES = [
   "Servicio profesional: un ciclo ordinario mensual, cálculo, recibos y archivos de obligaciones laborales acordados.",
   "No incluye salarios, aportes, prestaciones extraordinarias ni asesoría legal. Procesos adicionales se cotizan.",
-  "Configuración inicial desde RD$5,000, solo si no está incluida en la incorporación.",
-  "Es distinto del módulo de nómina del ERP; cuando Korventis opera la nómina no se suma la mensualidad del módulo.",
 ];
 
 export const ACCOUNTANT_ENABLEMENT = {
   title: "Habilitación y capacitación del contador",
   price: "RD$6,500",
+  // Hidden as a purchasable option until permissions and functions are validated.
+  available: false,
+  summary: "RD$6,500, pago único y opcional: configuración de permisos para una persona y hasta tres horas de capacitación remota.",
   points: [
     "Pago único: permisos para una persona y hasta tres horas de capacitación remota en las funciones contables habilitadas.",
     "Usuario adicional RD$350/mes, solo si requiere acceso y no hay un usuario disponible en su plan.",
@@ -116,11 +141,11 @@ export const ACCOUNTANT_ENABLEMENT = {
 };
 
 export const DATA_SERVICES: PriceRow[] = [
-  { name: "Analítica con Metabase", price: "Desde US$600/proyecto", scope: "Una fuente preparada y tres visualizaciones simples." },
-  { name: "Alojamiento y mantenimiento de Metabase", price: "Desde US$50/mes", scope: "Operación estándar según recursos y alcance; sin nuevos desarrollos." },
+  { name: "Implementación de analítica con Metabase", price: "Desde US$600/proyecto", scope: "Una fuente preparada y tres visualizaciones simples." },
+  { name: "Alojamiento y mantenimiento de Metabase (opcional)", price: "Desde US$50/mes", scope: "Mensualidad opcional, no se añade automáticamente. Operación estándar según recursos y alcance; sin nuevos desarrollos." },
   { name: "Tablero gerencial Power BI", price: "Desde US$900/proyecto", scope: "Una fuente preparada, un tablero de hasta dos páginas y cinco indicadores acordados." },
   { name: "Consultoría DBA especializada", price: "US$125/hora", scope: "Oracle, SQL Server y PostgreSQL." },
-  { name: "Diagnóstico técnico de bases de datos", price: "Desde US$400", scope: "Una instancia, revisión delimitada e informe priorizado; sin ejecución de correcciones." },
+  { name: "Diagnóstico técnico de bases de datos", price: "Desde US$400 · pago único", scope: "Una instancia, revisión delimitada e informe priorizado; sin ejecución de correcciones." },
   { name: "Desarrollo SQL e integraciones de datos", price: "Desde US$125/hora", scope: "Estimación y entregables aprobados." },
   { name: "Migración de bases de datos", price: "Propuesta a medida", scope: "Evaluación, pruebas, validación y plan de reversión según proyecto." },
 ];
@@ -152,7 +177,7 @@ export const DIAGNOSES: PriceRow[] = [
 
 export const ECF = {
   summary:
-    "Propuesta según proveedor: habilitación, documentos incluidos, excedentes y certificado. Sin cuotas por comprobante inventadas ni duplicación de pagos directos al proveedor.",
+    "La propuesta detalla habilitación, cuota del proveedor, comprobantes incluidos, período de consumo, tarifa por excedente y certificado digital. Los costos pagados directamente al proveedor no se vuelven a cobrar por Korventis.",
 };
 
 export const FISCAL_SCOPE =
