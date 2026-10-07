@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import { DELIVERABLES, ERP_PLANS, ERP_EXTRA_USER, ERP_DEDICATED, METHOD, PRICE_NOTICE, CONVERSATION_VS_DIAGNOSIS, FAQS } from "@/lib/offer";
+import { DELIVERABLES, ERP_PLANS, ERP_EXTRA_USER, ERP_DEDICATED, ERP_CARD_NOTE, METHOD, PRICE_NOTICE, CONVERSATION_VS_DIAGNOSIS, FAQS } from "@/lib/offer";
 import { Reveal } from "./reveal";
 import { CtaLink, ContactCta } from "./cta-button";
 
@@ -25,6 +25,7 @@ export function ErpPlansGrid() {
                 <li className="flex gap-2">{tick}Asistencia de uso: {p.assistance}</li>
                 <li className="flex gap-2">{tick}Usuario adicional: {ERP_EXTRA_USER}</li>
               </ul>
+              <p className="mt-4 border-t border-border pt-3 text-xs leading-relaxed text-muted-foreground">{ERP_CARD_NOTE}</p>
               <ContactCta servicio={"erp"} plan={`ERP ${p.name}`} variant="outline" size="md" className="mt-6 w-full">Solicitar propuesta ERP</ContactCta>
             </div>
           </Reveal>
