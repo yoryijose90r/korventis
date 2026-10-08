@@ -132,9 +132,10 @@ export const ACCOUNTANT_ENABLEMENT = {
   available: false,
   summary: "RD$6,500, pago único y opcional: configuración de permisos para una persona y hasta tres horas de capacitación remota.",
   points: [
+    "Una cuenta adicional cuesta RD$350/mes. Si existe un usuario incluido disponible en el ERP contratado, no se añade este cargo.",
+    "La iguala contable por sí sola no incluye una cuenta de acceso. Los reportes y exportaciones incluidos se entregan sin cargo adicional.",
+    "No se duplica capacitación ya incluida expresamente en otra implementación.",
     "Pago único: permisos para una persona y hasta tres horas de capacitación remota en las funciones contables habilitadas.",
-    "Usuario adicional RD$350/mes, solo si requiere acceso y no hay un usuario disponible en su plan.",
-    "Recibir los reportes y exportaciones incluidos en la iguala no tiene cargo.",
     "No sustituye el servicio contable: se define quién registra, revisa y presenta cada obligación.",
     "Disponible cuando los permisos y funciones estén validados.",
   ],
