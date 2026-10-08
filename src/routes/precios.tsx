@@ -11,6 +11,7 @@ import {
   ACCOUNTING_PLANS, ACCOUNTING_INCLUDES, ACCOUNTING_ONBOARDING, ACCOUNTING_NOTES,
   MANAGED_PAYROLL, MANAGED_PAYROLL_NOTES, ACCOUNTANT_ENABLEMENT,
   DATA_SERVICES, DATA_NOTES, ASSISTANCE, ASSISTANCE_NOTES, DIAGNOSES, ECF, PRICE_NOTICE,
+  PRICING_INTRO, PRICING_EXAMPLES, EXAMPLES_NOTE, PAYROLL_SETUP, PAYROLL_CLARIFY, ACCOUNTING_LEAD, DATA_INTRO,
   type PriceRow,
 } from "@/lib/offer";
 import { seo } from "@/lib/seo";
@@ -23,8 +24,7 @@ export const Route = createFileRoute("/precios")({
 
 const NAV = [
   ["erp", "ERP"],
-  ["puesta-en-marcha", "Puesta en marcha"],
-  ["gestion-contable", "Gestión contable"],
+    ["gestion-contable", "Gestión contable"],
   ["datos", "Datos y bases de datos"],
   ["complementarios", "Servicios complementarios"],
 ] as const;
@@ -63,6 +63,39 @@ function RowsTable({ rows, caption }: { rows: PriceRow[]; caption: string }) {
   );
 }
 
+function SetupTable() {
+  const rows = SETUP_OPTIONS.filter((r) => r.available !== false);
+  return (
+    <div className="overflow-x-auto rounded-2xl border border-border bg-white shadow-card">
+      <table className="w-full min-w-[640px] text-sm">
+        <caption className="sr-only">Modalidades de puesta en marcha</caption>
+        <thead className="bg-mist text-left text-xs uppercase tracking-wide text-muted-foreground">
+          <tr><th className="px-5 py-3 font-semibold">Modalidad</th><th className="px-5 py-3 font-semibold">Quién configura</th><th className="px-5 py-3 text-right font-semibold">Pago único</th><th className="px-5 py-3 font-semibold">Qué recibe</th></tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr key={r.name} className="border-t border-border align-top">
+              <td className="px-5 py-4 font-medium text-navy">{r.name}</td>
+              <td className="px-5 py-4 text-navy/85">{r.who}</td>
+              <td className="whitespace-nowrap px-5 py-4 text-right font-heading font-semibold text-brand">{r.price}</td>
+              <td className="px-5 py-4 text-muted-foreground">{r.scope}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function More({ title, items }: { title: string; items: string[] }) {
+  return (
+    <details className="group mt-5 rounded-xl border border-border bg-white p-4">
+      <summary className="flex cursor-pointer list-none items-center justify-between font-heading text-sm font-semibold text-navy">{title}<span className="text-sky transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
+      <div className="mt-3"><List items={items} /></div>
+    </details>
+  );
+}
+
 function TierTable({ rows, head }: { rows: [string, string][]; head: [string, string] }) {
   return (
     <table className="mt-5 w-full text-sm">
@@ -87,34 +120,57 @@ function Precios() {
         </Container>
       </nav>
 
+      <section className="bg-background pt-16">
+        <Container>
+          <p className="mx-auto max-w-3xl text-center text-lg leading-relaxed text-navy/85">{PRICING_INTRO}</p>
+          <div className="mx-auto mt-8 grid max-w-4xl gap-4 sm:grid-cols-2">
+            {PRICING_EXAMPLES.map(([t, d]) => (
+              <div key={t} className="rounded-2xl border border-border bg-white p-5">
+                <p className="text-xs font-semibold uppercase tracking-wide text-sky">Ejemplo</p>
+                <p className="mt-1 font-heading font-semibold text-navy">{t}</p>
+                <p className="mt-1 text-sm text-navy/85">{d}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-center text-xs text-muted-foreground">{EXAMPLES_NOTE}</p>
+        </Container>
+      </section>
+
       <section id="erp" className="scroll-mt-32 bg-background py-20">
         <Container>
-          <SectionHeading eyebrow="ERP · Mensualidad en RD$" title="Planes de Korventis ERP" subtitle="Alojamiento compartido administrado, mantenimiento estándar, respaldos y monitoreo según contrato." />
+          <SectionHeading eyebrow="ERP para operar con tu equipo · Mensualidad en RD$" title="Planes de Korventis ERP" subtitle="Alojamiento compartido administrado, mantenimiento estándar, respaldos y monitoreo incluidos según contrato. Sin cargo adicional de nube." />
           <div className="mt-12"><ErpPlansGrid /></div>
-          <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-border bg-white p-7">
-            <h3 className="flex items-center gap-2 font-heading text-lg font-semibold text-navy"><Info className="h-5 w-5 text-sky" aria-hidden="true" />Condiciones</h3>
-            <div className="mt-4"><List items={ERP_RULES} /></div>
+          <div className="mx-auto max-w-3xl"><More title="Condiciones del servicio" items={ERP_RULES} /></div>
+
+          <div className="mt-16">
+            <h3 className="text-center font-heading text-2xl font-bold text-navy">Puesta en marcha asistida · pago único</h3>
+            <p className="mt-2 text-center text-sm font-medium text-brand">Se elige una sola modalidad; no se suman entre sí.</p>
+            <div className="mt-6"><SetupTable /></div>
+            <p className="mt-3 text-center text-xs text-muted-foreground">{SETUP_NOTE}</p>
+          </div>
+
+          <div className="mt-16 grid gap-6 lg:grid-cols-2">
+            <article className="rounded-2xl border border-border bg-white p-7">
+              <div className="flex flex-wrap items-center gap-2"><h3 className="font-heading text-xl font-bold text-navy">Tu equipo procesa la nómina</h3><Tag>Mensualidad · opcional</Tag></div>
+              <TierTable rows={ERP_PAYROLL} head={["Empleados únicos / mes", "Software adicional"]} />
+              <p className="mt-4 text-sm text-muted-foreground">{ERP_PAYROLL_NOTE}</p>
+            </article>
+            <article className="rounded-2xl border border-border bg-white p-7">
+              <div className="flex flex-wrap items-center gap-2"><h3 className="font-heading text-xl font-bold text-navy">Korventis procesa la nómina</h3><Tag>Mensualidad · opcional</Tag></div>
+              <TierTable rows={MANAGED_PAYROLL} head={["Empleados únicos / mes", "Servicio profesional"]} />
+              <More title="Qué incluye y qué se cobra aparte" items={MANAGED_PAYROLL_NOTES} />
+            </article>
+          </div>
+          <div className="mx-auto mt-6 max-w-3xl space-y-2 text-center text-sm text-navy/85">
+            <p className="font-medium">{PAYROLL_CLARIFY}</p>
+            <p className="text-muted-foreground">{PAYROLL_SETUP}</p>
           </div>
         </Container>
       </section>
 
-      <section id="puesta-en-marcha" className="scroll-mt-32 bg-mist py-20">
+      <section id="gestion-contable" className="scroll-mt-32 bg-mist py-20">
         <Container>
-          <SectionHeading eyebrow="Puesta en marcha · Pago único en RD$" title="Elige cómo arrancar" subtitle={SETUP_NOTE} />
-          <div className="mt-10"><RowsTable rows={SETUP_OPTIONS} caption="Modalidades de puesta en marcha" /></div>
-          <Reveal>
-            <article className="mx-auto mt-10 max-w-2xl rounded-2xl border border-border bg-white p-7">
-              <div className="flex flex-wrap items-center gap-2"><h3 className="font-heading text-xl font-bold text-navy">Nómina del ERP</h3><Tag>Mensualidad</Tag></div>
-              <TierTable rows={ERP_PAYROLL} head={["Empleados únicos / mes", "Mensualidad"]} />
-              <p className="mt-4 text-sm text-muted-foreground">{ERP_PAYROLL_NOTE}</p>
-            </article>
-          </Reveal>
-        </Container>
-      </section>
-
-      <section id="gestion-contable" className="scroll-mt-32 bg-background py-20">
-        <Container>
-          <SectionHeading eyebrow="Gestión contable · Mensualidad en RD$" title="Información contable organizada para cumplir, controlar y decidir." subtitle={ACCOUNTING_INCLUDES} />
+          <SectionHeading eyebrow="Gestión realizada por Korventis · Mensualidad en RD$" title="Información contable organizada para cumplir, controlar y decidir." subtitle={ACCOUNTING_LEAD} />
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             {ACCOUNTING_PLANS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 60}>
@@ -131,30 +187,28 @@ function Precios() {
               </Reveal>
             ))}
           </div>
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            <article className="rounded-2xl border border-border bg-white p-7">
-              <div className="flex flex-wrap items-center gap-2"><h3 className="font-heading text-lg font-semibold text-navy">Incorporación inicial · {ACCOUNTING_ONBOARDING.price}</h3><Tag>Pago único</Tag></div>
-              <p className="mt-3 text-sm text-muted-foreground">{ACCOUNTING_ONBOARDING.text}</p>
-              <div className="mt-5"><List items={ACCOUNTING_NOTES} /></div>
-            </article>
-            <article className="rounded-2xl border border-border bg-white p-7">
-              <div className="flex flex-wrap items-center gap-2"><h3 className="font-heading text-lg font-semibold text-navy">Nómina administrada</h3><Tag>Mensualidad adicional</Tag></div>
-              <TierTable rows={MANAGED_PAYROLL} head={["Empleados únicos / mes", "Precio adicional"]} />
-              <div className="mt-5"><List items={MANAGED_PAYROLL_NOTES} /></div>
-            </article>
-          </div>
-          <article className="mt-6 rounded-2xl border border-brand/20 bg-mist p-7">
-            <div className="flex flex-wrap items-center gap-2"><h3 className="font-heading text-lg font-semibold text-navy">{ACCOUNTANT_ENABLEMENT.title} · {ACCOUNTANT_ENABLEMENT.price}</h3><Tag>Pago único</Tag></div>
-            <div className="mt-4"><List items={ACCOUNTANT_ENABLEMENT.points} /></div>
+          <article className="mx-auto mt-10 max-w-3xl rounded-2xl border border-border bg-white p-7">
+            <div className="flex flex-wrap items-center gap-2"><h3 className="font-heading text-lg font-semibold text-navy">Incorporación inicial · {ACCOUNTING_ONBOARDING.price}</h3><Tag>Pago único</Tag></div>
+            <p className="mt-3 text-sm text-muted-foreground">{ACCOUNTING_ONBOARDING.text}</p>
+            <p className="mt-3 text-sm text-navy/85">{ACCOUNTING_INCLUDES}</p>
+            <More title="Condiciones y qué se cobra aparte" items={ACCOUNTING_NOTES} />
+            <p className="mt-5 text-sm text-muted-foreground">Adicional opcional, no requisito: nómina administrada por Korventis (ver sección ERP).</p>
           </article>
+          {ACCOUNTANT_ENABLEMENT.available && (
+            <article className="mx-auto mt-6 max-w-3xl rounded-2xl border border-brand/20 bg-white p-7">
+              <h3 className="font-heading text-lg font-semibold text-navy">{ACCOUNTANT_ENABLEMENT.title}</h3>
+              <p className="mt-3 text-sm text-navy/85">{ACCOUNTANT_ENABLEMENT.summary}</p>
+              <More title="Condiciones" items={ACCOUNTANT_ENABLEMENT.points} />
+            </article>
+          )}
         </Container>
       </section>
 
       <section id="datos" className="scroll-mt-32 bg-mist py-20">
         <Container>
-          <SectionHeading eyebrow="Datos y bases de datos · Precios en US$" title="Analítica e ingeniería de datos" subtitle="Tarifas propias en US$; no son una conversión cambiaria. Cada propuesta confirma los entregables antes de contratar." />
+          <SectionHeading eyebrow="Datos y bases de datos · Precios en US$" title="Analítica e ingeniería de datos" subtitle={DATA_INTRO} />
           <div className="mt-10"><RowsTable rows={DATA_SERVICES} caption="Servicios de datos y bases de datos" /></div>
-          <div className="mx-auto mt-8 max-w-3xl"><List items={DATA_NOTES} /></div>
+          <div className="mx-auto max-w-3xl"><More title="Qué se cobra aparte y condiciones" items={DATA_NOTES} /></div>
           <div className="mt-10 text-center"><ContactCta servicio={"datos"} plan={"Datos y bases de datos"} size="lg">Definir mi proyecto</ContactCta></div>
         </Container>
       </section>
@@ -166,7 +220,7 @@ function Precios() {
             <article className="rounded-2xl border border-border bg-white p-7">
               <div className="flex flex-wrap items-center gap-2"><h3 className="font-heading text-lg font-semibold text-navy">Asistencia y formación</h3><Tag>RD$</Tag></div>
               <TierTable rows={ASSISTANCE} head={["Modalidad", "Precio"]} />
-              <div className="mt-5"><List items={ASSISTANCE_NOTES} /></div>
+              <More title="Condiciones" items={ASSISTANCE_NOTES} />
             </article>
             <article className="rounded-2xl border border-border bg-white p-7">
               <h3 className="font-heading text-lg font-semibold text-navy">Facturación electrónica (e-CF)</h3>
