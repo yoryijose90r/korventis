@@ -269,3 +269,57 @@ export const FAQS: [string, string][] = [
     "Sí. Cada línea de servicio puede contratarse por separado o combinarse según lo que tu empresa necesite.",
   ],
 ];
+
+// ---------------------------------------------------------------------------
+// Estimator catalog (numeric mirror of the public prices above). Bump the
+// version whenever any amount changes. Only authorized sale prices live here.
+// ---------------------------------------------------------------------------
+export const ESTIMATOR_CATALOG = {
+  version: "2026-10-v1",
+  erp: {
+    plans: [
+      { code: "erp_start", id: "start", name: "Start", monthly: 990, users: 1, pos: 0 },
+      { code: "erp_pyme", id: "pyme", name: "Pyme", monthly: 1990, users: 3, pos: 1 },
+      { code: "erp_business", id: "business", name: "Business", monthly: 3490, users: 5, pos: 2 },
+    ],
+    extraUser: 350,
+    setup: {
+      autogestion: { name: "Activación autogestionada", amount: 0, available: false },
+      asistida: { name: "Configuración asistida", amount: 5000, available: true },
+      operativa: { name: "Implementación operativa", amount: 15000, available: true },
+      especializada: { name: "Implementación especializada", amount: 30000, available: true, from: true },
+    },
+  },
+  accounting: {
+    plans: [
+      { code: "acc_esencial", name: "Esencial", monthly: 9500, docs: 40, banks: 1 },
+      { code: "acc_gestion", name: "Gestión", monthly: 14500, docs: 70, banks: 2 },
+      { code: "acc_direccion", name: "Dirección", monthly: 22500, docs: 150, banks: 3 },
+    ],
+    onboarding: 7500,
+  },
+  payroll: {
+    software: [ { max: 10, monthly: 990 }, { max: 40, monthly: 1990 }, { max: 100, monthly: 3490 } ],
+    managed: [ { max: 10, monthly: 2500 }, { max: 40, monthly: 4500 }, { max: 100, monthly: 7500 } ],
+    setupFrom: 5000,
+  },
+  ecf: {
+    // Commercial projection, NOT a confirmed provider contract. Keep false until validated.
+    providerRateConfirmed: false,
+    // Owner-only commercial rate; never editable by visitors.
+    commercialRate: 75,
+    tableUsd: [
+      [300, 2.76], [500, 4.85], [700, 6.02], [950, 8.365], [1200, 10.44], [2000, 15.6],
+      [2500, 19.25], [3500, 26.6], [7000, 41.3], [12000, 63.6], [30000, 147], [50000, 250],
+      [100000, 400], [200000, 600], [500000, 1350], [1000000, 2500],
+    ] as [number, number][],
+  },
+  accountant: { amount: 6500, available: ACCOUNTANT_ENABLEMENT.available },
+  assistance: { h2: 2500, h4: 5000 },
+  data: {
+    metabase: { name: "Implementación de analítica con Metabase", usd: 600 },
+    powerbi: { name: "Tablero gerencial Power BI", usd: 900 },
+    dbadiag: { name: "Diagnóstico técnico de bases de datos", usd: 400 },
+    dbaHour: 125,
+  },
+} as const;
